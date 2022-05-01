@@ -14,26 +14,9 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <header>
-      <nav>
-        <Link href="/">
-          <a>Home</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/about">
-          <a>About</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/users">
-          <a>Users List</a>
-        </Link>{' '}
-        | <a href="/api/users">Users API</a>
-      </nav>
-    </header>
     {children}
     <footer>
-      <hr />
-      <span>I'm here to stay (Footer)</span>
+      <p>Built with help from Milk Road. <a href="https://www.milkroad.com/subscribe?ref=u40ryDPPBO" target="_blank">Subscribe to Milk Road</a> for their smart, no-bullshit crypto updates that you can read in less than 5 minutes.</p>
     </footer>
   </div>
 )
