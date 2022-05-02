@@ -15,8 +15,8 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
     </Head>
     {children}
     <footer className='h-15'>
-      <div className='w-11/12 mx-auto px-4'>
-        <p className='text-xs md:text-lg pb-4'>Built with help from Milk Road. <a className='text-pink-500 border-b-2 border-pink-500' href="https://www.milkroad.com/subscribe?ref=u40ryDPPBO" target="_blank">Subscribe to Milk Road</a> for their smart, no-bullshit crypto updates that you can read in less than 5 minutes.</p>
+      <div className='w-full lg:w-11/12 mx-auto px-2'>
+        <p className='text-xs md:text-lg pb-4'>Built with help from Milk Road. <a className='text-pink-500 border-b-2 border-pink-500' href="https://www.milkroad.com/subscribe?ref=u40ryDPPBO" target="_blank">Subscribe to Milk Road</a> for their smart, no-bullshit crypto updates.</p>
       </div>
     </footer>
   </div>
