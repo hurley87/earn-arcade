@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    background: linear-gradient(-45deg, #e9d5ff, #f5d0fe, #fbcfe8);
+    background: linear-gradient(-45deg, #e9d5ff, #fbcfe8, #fda4af);
     background-size: 400% 400%;
     animation: gradient 10s ease infinite;
     height: 100vh;
