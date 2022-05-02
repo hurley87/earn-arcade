@@ -1,11 +1,13 @@
 import Layout from '../components/Layout'
-import Link from 'next/link'
 
 const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Get Paid to Play Games Online</h1>
-    <p>Imagine a world where you can get paid to play games like Wordle. That's the world we're building. Launching on may 8th.</p>
-    <p>Follow @davidhurley87 for the latest.</p>
+  <Layout title="Earn Arcade">
+    <div className='w-11/12 mx-auto px-4 pt-10'>
+      <h1 className='text-xl md:text-7xl font-VT323'>Get Paid to Play Games Online</h1>
+      <p className='text-xl pt-2'>Imagine a world where you can get paid to play games like Wordle.</p>
+      <p className='text-xl'>That's the world we're building. <b>Launching May 8th.</b></p>
+      <p className='text-xl pt-8'>Follow <a className='text-blue-500 border-b-2 border-blue-500' href="https://twitter.com/davidhurley87" target="_blank">@davidhurley87</a> for the latest.</p>
+    </div>
   </Layout>
 )
 

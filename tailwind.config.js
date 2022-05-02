@@ -1,11 +1,15 @@
 module.exports = {
-  mode: "jit",
+  mode: 'jit',
   content: [
-    "./pages/**/*.{html,js,jsx,ts,tsx}",
-    "./components/**/*.{html,js,jsx,ts,tsx}",
-    "./index.js",
+    './pages/**/*.{html,js,jsx,ts,tsx}',
+    './components/**/*.{html,js,jsx,ts,tsx}',
+    './index.js',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        VT323: ['VT323'],
+      },
+    },
   },
-};
+}
