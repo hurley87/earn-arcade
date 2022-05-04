@@ -165,7 +165,7 @@ export default function Hodle() {
 
   return (
     <div className="m-auto flex h-screen w-full flex-col dark:bg-gray-700">
-      <main className="m-auto flex max-w-lg flex-1 flex-col justify-between p-4">
+      <main className="m-auto flex max-w-lg flex-1 flex-col justify-between p-4 pb-32">
         <Grid data={grid} />
         <div className="flex-1 md:hidden"></div>
         <Keyboard
