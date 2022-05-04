@@ -82,7 +82,7 @@
 
 "@heroicons/react@^1.0.6":
   version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-1.0.6.tgz#35dd26987228b39ef2316db3b1245c42eb19e324"
+  resolved "https://registry.npmjs.org/@heroicons/react/-/react-1.0.6.tgz"
   integrity sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ==
 
 "@next/env@12.1.6":
@@ -183,7 +183,7 @@
 
 "@types/ramda@^0.28.12":
   version "0.28.12"
-  resolved "https://registry.npmjs.org/@types/ramda/-/ramda-0.28.12.tgz"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.28.12.tgz#03a8d2e5d12a4d940cdf9ebf7201d3b98ee8d87f"
   integrity sha512-01lBa/nWJMmzc7uwvN4pzoePRWMURV1uRpchCpomAFW1MvMSyOtHjj8/WpaCFrrBQ8Mvpasm/CK3YpcWbVcZ3g==
   dependencies:
     ts-toolbelt "^6.15.1"
@@ -434,7 +434,7 @@ fraction.js@^4.2.0:
 
 framer-motion@^6.3.3:
   version "6.3.3"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-6.3.3.tgz#58978fe6955d13000351ea4c134c9bc052638967"
+  resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-6.3.3.tgz"
   integrity sha512-wo0dCnoq5vn4L8YVOPO9W54dliH78vDaX0Lj+bSPUys6Nt5QaehrS3uaYa0q5eVeikUgtTjz070UhQ94thI5Sw==
   dependencies:
     framesync "6.0.1"
@@ -502,12 +502,12 @@ has@^1.0.3:
 
 hashlru@^2.3.0:
   version "2.3.0"
-  resolved "https://registry.yarnpkg.com/hashlru/-/hashlru-2.3.0.tgz#5dc15928b3f6961a2056416bb3a4910216fdfb51"
+  resolved "https://registry.npmjs.org/hashlru/-/hashlru-2.3.0.tgz"
   integrity sha512-0cMsjjIC8I+D3M44pOQdsy0OHXGLVz6Z0beRuufhKa0KfaD2wGwAev6jILzXsd3/vpnNQJmWyZtIILqM1N+n5A==
 
 heroicons@^1.0.6:
   version "1.0.6"
-  resolved "https://registry.yarnpkg.com/heroicons/-/heroicons-1.0.6.tgz#1c2b2e0935a46516c3513afacfcaea71f0b68dd7"
+  resolved "https://registry.npmjs.org/heroicons/-/heroicons-1.0.6.tgz"
   integrity sha512-5bxTsG2hyNBF0l+BrFlZlR5YngQNMfl0ggJjIRkMSADBQbaZMoTg47OIQzq6f1mpEZ85HEIgSC4wt5AeFM9J2Q==
 
 hey-listen@^1.0.8:
@@ -1012,7 +1012,7 @@ react-dom@^17.0.2:
 
 react-toastify@^9.0.0:
   version "9.0.0"
-  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-9.0.0.tgz#bd31a38567ccc7fd801acb00a11fb4983ee365f0"
+  resolved "https://registry.npmjs.org/react-toastify/-/react-toastify-9.0.0.tgz"
   integrity sha512-gmxAFTKV0VVN7s5UEcZdC+bBR1EQtsqXgHJWQgB0G5J8m3Mdxz1Pacm7BJ1nTHkMMNfupruKCu7wUwAq46Z1jg==
   dependencies:
     clsx "^1.1.1"
@@ -1086,14 +1086,14 @@ supports-preserve-symlinks-flag@^1.0.0:
 
 tailwind-merge@^1.2.0:
   version "1.2.1"
-  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.2.1.tgz#a9a10f7ac54cb79cfa14268f1fecbb0248e08acc"
+  resolved "https://registry.npmjs.org/tailwind-merge/-/tailwind-merge-1.2.1.tgz"
   integrity sha512-kWfy/u91XoE408Kb42HQd1krdiZjw2sbSWjE1C/lXXXsbK+6dhTpnd37DHrwNP6ofKj5/HKXlY/jTjPYgPxSsw==
   dependencies:
     hashlru "^2.3.0"
 
 tailwind-styled-components@^2.1.7:
   version "2.1.7"
-  resolved "https://registry.yarnpkg.com/tailwind-styled-components/-/tailwind-styled-components-2.1.7.tgz#c314249a4fda76441c9be5205db1e29573574c5a"
+  resolved "https://registry.npmjs.org/tailwind-styled-components/-/tailwind-styled-components-2.1.7.tgz"
   integrity sha512-L20oQlwWM+kbYHIrwvvMQ0HHqt1Z/tInnO/Q9zM0IV/vqUxSIcLAmhMwbbiZmyXTdAVz84N4s1GtIyGODq80Pw==
   dependencies:
     tailwind-merge "^1.2.0"
@@ -1134,12 +1134,12 @@ to-regex-range@^5.0.1:
 
 ts-pattern@^4.0.2:
   version "4.0.2"
-  resolved "https://registry.yarnpkg.com/ts-pattern/-/ts-pattern-4.0.2.tgz#b36afdb2de1ec0224539dcb7cea3a57c41453b9f"
+  resolved "https://registry.npmjs.org/ts-pattern/-/ts-pattern-4.0.2.tgz"
   integrity sha512-eHqR/7A6fcw05vCOfnL6RwgGJbVi9G/YHTdYdjYmElhDdJ1SMn7pWs+6+YuxygaFwQS/g+cIDlu+UD8IVpur1A==
 
 ts-toolbelt@^6.15.1:
   version "6.15.5"
-  resolved "https://registry.npmjs.org/ts-toolbelt/-/ts-toolbelt-6.15.5.tgz"
+  resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-6.15.5.tgz#cb3b43ed725cb63644782c64fbcad7d8f28c0a83"
   integrity sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==
 
 tslib@^2.1.0:
