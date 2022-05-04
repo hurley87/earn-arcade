@@ -6,7 +6,7 @@ type Props = {
   title?: string
 }
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => (
+const Layout = ({ children, title = 'Earn Arcade' }: Props) => (
   <div className='flex flex-col h-screen justify-between'>
     <Head>
       <title>{title}</title>
