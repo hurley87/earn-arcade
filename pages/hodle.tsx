@@ -3,18 +3,16 @@ import Grid from "../components/Hodle/Grid";
 import Keyboard, { isMappableKey } from "../components/Hodle/Keyboard";
 import { findLastNonEmptyTile } from "../utils/Hodle/helpers";
 import { makeEmptyGrid, getRowWord, getNextRow } from "../utils/Hodle/helpers";
-const emptyGrid = makeEmptyGrid()
 import * as api from "../utils/Hodle/api"
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Hodle() {
+  const emptyGrid = makeEmptyGrid()
   const [grid, setGrid] = useState(emptyGrid)
   const [cursor, setCursor] = useState({ y: 0, x: 0 })
   const [isLoading, setIsLoading] = useState(false)
-  const [keys, setKeys] = useState({})
   const [secret, setSecret] = useState("")
 
   useEffect(() => {
@@ -53,12 +51,11 @@ export default function Hodle() {
 
     const newGrid = grid
     const lastNonEmptyTile = findLastNonEmptyTile(
-        grid[cursor.y]
+      grid[cursor.y]
     );
 
     if (!lastNonEmptyTile) {
-    // nothing to to here :jetpack:
-        return;
+      return;
     }
 
     const newCursor = lastNonEmptyTile.cursor;
@@ -136,22 +133,24 @@ export default function Hodle() {
 
     if (won) {
         toast.success(`Damn you good! 🎉`, {
-            position: "top-center"
+            position: "top-center",
+            onClose: function() {
+              resetGame()
+            }
         });
-        setIsLoading(true)
+        
 
         setTimeout(async function() {
-            setGrid(emptyGrid)
-            setCursor({ y: 0, x: 0 })
-            const result = await api.getSecretWord();
-            setSecret(result.secret)
-            setIsLoading(false)
+
         }, 5000);
 
       } else {
         if (isLastRow) {
-            toast.success(`Not today, my dude =/"`, {
-                position: "top-center"
+            toast.error(`Not today, my dude =/"`, {
+                position: "top-center",
+                onClose: function() {
+                  resetGame()
+                }
             });
         }
       }
@@ -163,15 +162,24 @@ export default function Hodle() {
     };
   }
 
+  async function resetGame() {
+    setIsLoading(true)
+    setGrid(emptyGrid)
+    setCursor({ y: 0, x: 0 })
+    const result = await api.getSecretWord();
+    setSecret(result.secret)
+    setIsLoading(false)
+  }
+
   return (
     <div className="m-auto flex h-screen w-full flex-col dark:bg-gray-700">
       <main className="m-auto flex max-w-lg flex-1 flex-col justify-between p-4 pb-32">
         <Grid data={grid} />
         <div className="flex-1 md:hidden"></div>
         <Keyboard
-            usedKeys={keys}
-            disabled={isLoading}
-            onKeyPress={handleKeyPress}
+          data={grid}
+          disabled={isLoading}
+          onKeyPress={handleKeyPress}
         />
       </main>
       <ToastContainer />
