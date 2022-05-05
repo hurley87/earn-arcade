@@ -134,25 +134,20 @@ export default function Hodle() {
     }
 
     if (won) {
-        toast.success(`Damn you good! 🎉`, {
-            position: "top-center",
-            onClose: function() {
-              resetGame()
-            }
+      setIsLoading(true)
+      toast.success(`Damn you good! 🎉`, {
+          position: "top-center",
+          onClose: function() {
+            resetGame()
+          }
+      });
+    } else {
+      if (isLastRow) {
+        toast.success(`Not today, my dude =/"`, {
+            position: "top-center"
         });
-        
-
-        setTimeout(async function() {
-
-        }, 5000);
-
-      } else {
-        if (isLastRow) {
-            toast.success(`Not today, my dude =/"`, {
-                position: "top-center"
-            });
-        }
       }
+    }
 
     return {
         status: !isLastRow && !won ? "playing" : won ? "win" : "loss",
@@ -162,10 +157,7 @@ export default function Hodle() {
   }
 
   async function resetGame() {
-    console.log("RESET")
     const emptyGrid = makeEmptyGrid()
-    console.log(emptyGrid)
-    setIsLoading(true)
     setGrid(emptyGrid)
     setCursor({ y: 0, x: 0 })
     const result = await api.getSecretWord();
@@ -179,6 +171,8 @@ export default function Hodle() {
     const tile = allKeys[i]
     if(tile.children !== "" && tile.variant !== 'empty') usedKeys.push(tile)
   }
+
+  console.log(secret)
 
   return (
     <div className="m-auto flex h-screen w-full flex-col dark:bg-gray-700">
