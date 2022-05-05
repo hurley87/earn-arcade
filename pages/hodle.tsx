@@ -143,7 +143,7 @@ export default function Hodle() {
       });
     } else {
       if (isLastRow) {
-        toast.error(`Not today, my dude =/"`, {
+        toast.error(`The word was ${secret}.`, {
             position: "top-center",
             onClose: function() {
               resetGame()
