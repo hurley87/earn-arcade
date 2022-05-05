@@ -8,9 +8,9 @@ import { flatten } from "ramda";
 export const BackspaceIcon = () => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height="24"
-      viewBox="0 0 24 24"
-      width="24"
+      height="15"
+      viewBox="0 0 24 20"
+      width="15"
     >
       <path
         fill="currentcolor"
