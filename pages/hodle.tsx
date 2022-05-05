@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Grid from "../components/Hodle/Grid";
+import RewardModal from "../components/Hodle/RewardModal";
 import Keyboard, { isMappableKey } from "../components/Hodle/Keyboard";
 import { findLastNonEmptyTile } from "../utils/Hodle/helpers";
 import { makeEmptyGrid, getRowWord, getNextRow } from "../utils/Hodle/helpers";
@@ -15,6 +16,7 @@ export default function Hodle() {
   const [cursor, setCursor] = useState({ y: 0, x: 0 })
   const [isLoading, setIsLoading] = useState(false)
   const [secret, setSecret] = useState("")
+  const [rewardModal, setRewardModal] = useState(false)
 
   useEffect(() => {
     async function loadGame() {
@@ -56,8 +58,7 @@ export default function Hodle() {
     );
 
     if (!lastNonEmptyTile) {
-    // nothing to to here :jetpack:
-        return;
+      return;
     }
 
     const newCursor = lastNonEmptyTile.cursor;
@@ -135,10 +136,11 @@ export default function Hodle() {
 
     if (won) {
       setIsLoading(true)
-      toast.success(`Damn you good! 🎉`, {
+      toast.success(`You win a reward! 🎉`, {
           position: "top-center",
           onClose: function() {
             resetGame()
+            setRewardModal(true)
           }
       });
     } else {
@@ -188,6 +190,7 @@ export default function Hodle() {
           onKeyPress={handleKeyPress}
         />
       </main>
+      <RewardModal open={rewardModal} onClose={() => setRewardModal(false)}/>
       <ToastContainer />
     </div>
   );
