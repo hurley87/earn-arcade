@@ -143,8 +143,11 @@ export default function Hodle() {
       });
     } else {
       if (isLastRow) {
-        toast.success(`Not today, my dude =/"`, {
-            position: "top-center"
+        toast.error(`Not today, my dude =/"`, {
+            position: "top-center",
+            onClose: function() {
+              resetGame()
+            }
         });
       }
     }
@@ -175,7 +178,7 @@ export default function Hodle() {
   console.log(secret)
 
   return (
-    <div className="m-auto flex h-screen w-full flex-col dark:bg-gray-700">
+    <div className="m-auto flex h-screen w-full flex-col dark:bg-gray-700 overflow-y-hidden">
       <main className="m-auto flex max-w-lg flex-1 flex-col justify-between p-4 pb-32">
         <Grid data={grid} />
         <div className="flex-1 md:hidden"></div>
