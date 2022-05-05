@@ -4,6 +4,7 @@ import Keyboard, { isMappableKey } from "../components/Hodle/Keyboard";
 import { findLastNonEmptyTile } from "../utils/Hodle/helpers";
 import { makeEmptyGrid, getRowWord, getNextRow } from "../utils/Hodle/helpers";
 import * as api from "../utils/Hodle/api"
+import { flatten } from "ramda";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -51,11 +52,12 @@ export default function Hodle() {
 
     const newGrid = grid
     const lastNonEmptyTile = findLastNonEmptyTile(
-      grid[cursor.y]
+        grid[cursor.y]
     );
 
     if (!lastNonEmptyTile) {
-      return;
+    // nothing to to here :jetpack:
+        return;
     }
 
     const newCursor = lastNonEmptyTile.cursor;
@@ -146,11 +148,8 @@ export default function Hodle() {
 
       } else {
         if (isLastRow) {
-            toast.error(`Not today, my dude =/"`, {
-                position: "top-center",
-                onClose: function() {
-                  resetGame()
-                }
+            toast.success(`Not today, my dude =/"`, {
+                position: "top-center"
             });
         }
       }
@@ -163,6 +162,9 @@ export default function Hodle() {
   }
 
   async function resetGame() {
+    console.log("RESET")
+    const emptyGrid = makeEmptyGrid()
+    console.log(emptyGrid)
     setIsLoading(true)
     setGrid(emptyGrid)
     setCursor({ y: 0, x: 0 })
@@ -171,13 +173,20 @@ export default function Hodle() {
     setIsLoading(false)
   }
 
+  const usedKeys = []
+  const allKeys = flatten(grid)
+  for(const i in allKeys) {
+    const tile = allKeys[i]
+    if(tile.children !== "" && tile.variant !== 'empty') usedKeys.push(tile)
+  }
+
   return (
     <div className="m-auto flex h-screen w-full flex-col dark:bg-gray-700">
       <main className="m-auto flex max-w-lg flex-1 flex-col justify-between p-4 pb-32">
         <Grid data={grid} />
         <div className="flex-1 md:hidden"></div>
         <Keyboard
-          data={grid}
+          usedKeys={usedKeys}
           disabled={isLoading}
           onKeyPress={handleKeyPress}
         />

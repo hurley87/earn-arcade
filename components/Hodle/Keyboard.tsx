@@ -2,14 +2,14 @@ import { useCallback, useEffect } from "react";
 import { match } from "ts-pattern";
 import { always, propEq } from "ramda";
 import tw from "tailwind-styled-components";
-import { TileProps } from "./Tile";
-import { flatten } from "ramda";
+
+import type { GameTile } from "../../interfaces";
 
 export const BackspaceIcon = () => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       height="15"
-      viewBox="0 0 24 20"
+      viewBox="0 0 24 24"
       width="15"
     >
       <path
@@ -48,10 +48,10 @@ function isValidKey(key: string) {
 type Props = {
   onKeyPress: (key: string) => void;
   disabled?: boolean;
-  data: TileProps[][];
+  usedKeys: GameTile[]
 };
 
-export default function Keyboard({ onKeyPress, disabled, data }: Props) {
+export default function Keyboard({ onKeyPress, disabled, usedKeys }: Props) {
   useEffect(() => {
     function onKeyUp(e: KeyboardEvent) {
       if (isValidKey(e.key.toLowerCase())) {
@@ -66,16 +66,9 @@ export default function Keyboard({ onKeyPress, disabled, data }: Props) {
     };
   }, [onKeyPress]);
 
-  const usedKeys: TileProps[] = []
-  const allKeys = flatten(data)
-  for(const i in allKeys) {
-    const tile = allKeys[i]
-    if(tile.children !== "" && tile.variant !== 'empty') usedKeys.push(tile)
-  }
-
   const getKeyColors = useCallback(
     (key: string) => {
-      const tiles = usedKeys.filter(k => k.children === key);
+      const tiles = usedKeys.filter(k => k.children === key)
       if (tiles.length > 0) {
         const tile =
           tiles.find(propEq("variant", "correct")) ??
@@ -94,7 +87,7 @@ export default function Keyboard({ onKeyPress, disabled, data }: Props) {
 
       return {};
     },
-    []
+    [usedKeys]
   );
 
   return (
