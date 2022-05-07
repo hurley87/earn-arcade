@@ -57,7 +57,6 @@ export default function HelpModal(props: Props) {
               </div>
               {error && <div className='w-full text-center'>{error.message}</div>}
             </>
-
           )
         }
       </section>
