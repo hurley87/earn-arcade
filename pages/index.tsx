@@ -1,13 +1,18 @@
 import Layout from '../components/Layout'
-
+import Link from 'next/link'
 
 const IndexPage = () => {
   return (
     <Layout title="Arcade">
-      <h1 className='text-5xl md:text-6xl'>Get Paid to Play Games Online</h1>
-      <p className='text-xl md:text-2xl pt-2'>Imagine a world where you can get paid to play games like Wordle.</p>
-      <p className='text-xl md:text-2xl'>That's the world we're building. <b>Launching May 8th.</b></p>
-      <p className='text-xl md:text-2xl pt-8'>Check out our first game called, <a className='text-blue-500 border-b-2 border-blue-500' href="/hodle">hodle</a>. Follow <a className='text-blue-500 border-b-2 border-blue-500' href="https://twitter.com/davidhurley87" target="_blank">@davidhurley87</a> for the latest.</p>
+      <div className='text-center pt-12'>
+        <h1 className='text-4xl md:text-6xl font-bold max-w-xl mx-auto'>Get Paid to Play Games Online</h1>
+        <p className='text-xl md:text-2xl pt-4'>Play to Earn $MATIC.</p>
+        <Link href="/wordle">
+          <button className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded mt-6">
+            Win Wordle and earn 1 $MATIC
+          </button>
+        </Link>
+      </div>
     </Layout>
   )
 }
