@@ -178,6 +178,8 @@ export default function Hodle() {
     if(tile.children !== "" && tile.variant !== 'empty') usedKeys.push(tile)
   }
 
+  console.log(secret)
+
   return (
     <Layout>
       <main className="m-auto flex max-w-lg flex-1 flex-col justify-between px-1 py-4">
