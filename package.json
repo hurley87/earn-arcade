@@ -19,6 +19,7 @@
     "ramda": "^0.28.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-toastify": "^9.0.0",
     "siwe": "^1.1.6",
     "tailwind-styled-components": "^2.1.7",

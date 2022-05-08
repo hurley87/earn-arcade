@@ -1,11 +1,11 @@
 import Modal, { Props as ModalProps } from '../Modal'
 import {
   useAccount,
-  useConnect,
-  useDisconnect,
   useEnsAvatar,
   useEnsName,
 } from 'wagmi'
+import { getAccount } from '@wagmi/core';
+
 
 export type Props = Pick<ModalProps, 'open' | 'onClose'>
 
@@ -13,9 +13,11 @@ export default function HelpModal(props: Props) {
   const { data: account } = useAccount()
   const { data: ensAvatar } = useEnsAvatar({ addressOrName: account?.address })
   const { data: ensName } = useEnsName({ address: account?.address })
-  const { connect, connectors, error, isConnecting, pendingConnector } =
-    useConnect()
-  const { disconnect } = useDisconnect()
+
+  const otherAccount = getAccount()
+  console.log("ACCOUNTS")
+  console.log(account) 
+  console.log(otherAccount)
 
   return (
     <Modal title="Claim Your Reward" open={props.open} onClose={props.onClose}>
@@ -35,28 +37,11 @@ export default function HelpModal(props: Props) {
                 {ensName ? `${ensName} (${account.address})` : account.address}
               </div>
               <div>Connected to {account?.connector?.name}</div>
-              <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={() => disconnect()}>Disconnect</button>
             </div>
           ) : (
-            <>
-              <div className="grid gap-4 py-4">
-                {connectors.filter((c) => c.ready === true).map((connector) => (
-                  <button
-                    disabled={!connector.ready}
-                    key={connector.id}
-                    onClick={() => connect(connector)}
-                    className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                  >
-                    {connector.name}
-                    {!connector.ready && ' (unsupported)'}
-                    {isConnecting &&
-                      connector.id === pendingConnector?.id &&
-                      ' (connecting)'}
-                  </button>
-                ))}
-              </div>
-              {error && <div className='w-full text-center'>{error.message}</div>}
-            </>
+            <div className="grid gap-4 py-4">
+              Connect your wallet before claiming your reward.
+            </div>
           )
         }
       </section>

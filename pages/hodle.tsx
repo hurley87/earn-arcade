@@ -8,6 +8,7 @@ import * as api from "../utils/Hodle/api"
 import { flatten } from "ramda";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Layout from "../components/Layout";
 
 
 export default function Hodle() {
@@ -180,8 +181,8 @@ export default function Hodle() {
   console.log(secret)
 
   return (
-    <div className="m-auto flex h-screen w-full flex-col dark:bg-gray-700 overflow-y-hidden">
-      <main className="m-auto flex max-w-lg flex-1 flex-col justify-between p-4 pb-32">
+    <Layout>
+      <main className="m-auto flex max-w-lg flex-1 flex-col justify-between">
         <Grid data={grid} />
         <div className="flex-1 md:hidden"></div>
         <Keyboard
@@ -192,6 +193,6 @@ export default function Hodle() {
       </main>
       <RewardModal open={rewardModal} onClose={() => setRewardModal(false)}/>
       <ToastContainer />
-    </div>
+    </Layout>
   );
 }

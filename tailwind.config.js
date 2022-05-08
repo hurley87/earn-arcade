@@ -6,10 +6,6 @@ module.exports = {
     './index.js',
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        VT323: ['VT323'],
-      },
-    },
+    extend: {},
   },
 }

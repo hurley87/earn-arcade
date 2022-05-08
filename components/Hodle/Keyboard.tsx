@@ -91,7 +91,7 @@ export default function Keyboard({ onKeyPress, disabled, usedKeys }: Props) {
   );
 
   return (
-    <div className="mx-auto grid h-min select-none gap-4">
+    <div className="grid h-min select-none gap-4 w-full m-0 pt-6">
       {KEYS.map((row, i) => (
         <div
           className="flex touch-manipulation justify-evenly gap-1 md:gap-2"
@@ -120,8 +120,9 @@ export default function Keyboard({ onKeyPress, disabled, usedKeys }: Props) {
 }
 
 export const KeyButton = tw.button`
-  bg-gray-300 hover:bg-gray-400 active:opacity-60 md:p-3 
-   p-2 rounded-md md:text-xl sm:text-sm text-xs font-bold transition-all 
+  bg-gray-700 hover:bg-gray-500 active:opacity-60 md:p-3 
+   p-2 py-4 rounded-md md:text-xl sm:text-sm text-md font-bold transition-all 
    md:min-w-[2.5rem]
    min-w-[1.85rem]
+   shadow-xl
 `;
