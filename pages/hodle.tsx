@@ -182,7 +182,7 @@ export default function Hodle() {
 
   return (
     <Layout>
-      <main className="m-auto flex max-w-lg flex-1 flex-col justify-between">
+      <main className="m-auto flex max-w-lg flex-1 flex-col justify-between px-1 py-4">
         <Grid data={grid} />
         <div className="flex-1 md:hidden"></div>
         <Keyboard

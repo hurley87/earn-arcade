@@ -22,9 +22,9 @@ export const GridRow = (props: { data: TileProps[] }) => {
 
 export default function Grid(props: Props) {
   return (
-    <div className="m-auto grid h-min max-w-sm gap-4">
+    <div className="m-auto grid h-min max-w-sm gap-2">
       {props.data.map((row, i) => (
-        <div key={`row-${i}`} className="grid grid-cols-5 gap-4">
+        <div key={`row-${i}`} className="grid grid-cols-5 gap-2">
           {row.map((tile, j) => (
             <Tile
               key={`${i} - ${j}`}

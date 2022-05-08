@@ -53,16 +53,16 @@ type Props = {
 
 export default function Keyboard({ onKeyPress, disabled, usedKeys }: Props) {
   useEffect(() => {
-    function onKeyUp(e: KeyboardEvent) {
+    function onKeyDown(e: KeyboardEvent) {
       if (isValidKey(e.key.toLowerCase())) {
         onKeyPress(e.key.toLowerCase());
       }
     }
 
-    document.addEventListener("keyup", onKeyUp);
+    document.addEventListener("keydown", onKeyDown);
 
     return () => {
-      document.removeEventListener("keyup", onKeyUp);
+      document.removeEventListener("keydown", onKeyDown);
     };
   }, [onKeyPress]);
 
@@ -91,7 +91,7 @@ export default function Keyboard({ onKeyPress, disabled, usedKeys }: Props) {
   );
 
   return (
-    <div className="grid h-min select-none gap-4 w-full m-0 pt-6">
+    <div className="grid h-min select-none gap-4 w-full m-0 pt-8">
       {KEYS.map((row, i) => (
         <div
           className="flex touch-manipulation justify-evenly gap-1 md:gap-2"
@@ -120,7 +120,7 @@ export default function Keyboard({ onKeyPress, disabled, usedKeys }: Props) {
 }
 
 export const KeyButton = tw.button`
-  bg-gray-700 hover:bg-gray-500 active:opacity-60 md:p-3 
+  bg-blue-700 hover:bg-blue-500 active:opacity-60 md:p-3 
    p-2 py-4 rounded-md md:text-xl sm:text-sm text-md font-bold transition-all 
    md:min-w-[2.5rem]
    min-w-[1.85rem]

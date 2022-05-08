@@ -16,11 +16,11 @@ const Layout = ({ children, title = 'Earn Arcade' }: Props) => (
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <div className='flex justify-between w-full md:w-11/12 mx-auto p-4'>
-      <Link href="/"><p className='text-2xl text-white text-center flex font-extrabold cursor-pointer'><SiApplearcade style={{position: 'relative', top: '2px', marginRight: '8px'}} />{" "}Arcade</p></Link>
+    <div className='flex justify-between w-full md:w-11/12 mx-auto py-4 px-2'>
+      <Link href="/"><p className='text-2xl text-white text-center flex font-extrabold cursor-pointer pt-1'><SiApplearcade style={{position: 'relative', top: '2px', marginRight: '8px'}} />{" "}Arcade</p></Link>
       <ConnectButton />
     </div>
-    <div className='w-full md:w-11/12 mx-auto p-4 text-white'>
+    <div className='w-full md:w-11/12 mx-auto text-white'>
       {children}
     </div>
     <footer className='h-15 absolute bottom-0 left-0 right-0'>
