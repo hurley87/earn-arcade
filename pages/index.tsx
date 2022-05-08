@@ -5,10 +5,10 @@ import { getAccount } from '@wagmi/core';
 
 const IndexPage = () => {
   const account = getAccount()
-  console.log(account)
+  console.log(account) 
   return (
     <Layout title="Earn Arcade">
-      <div className='w-full md:w-11/12 mx-auto px-2 pt-6'>
+      <div className='w-full md:w-11/12 mx-auto px-2 pt-6 text-white'>
         <h1 className='text-5xl md:text-6xl font-VT323'>Get Paid to Play Games Online</h1>
         <p className='text-xl md:text-2xl pt-2'>Imagine a world where you can get paid to play games like Wordle.</p>
         <p className='text-xl md:text-2xl'>That's the world we're building. <b>Launching May 8th.</b></p>
