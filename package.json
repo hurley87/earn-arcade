@@ -24,7 +24,8 @@
     "siwe": "^1.1.6",
     "tailwind-styled-components": "^2.1.7",
     "ts-pattern": "^4.0.2",
-    "wagmi": "^0.3.4"
+    "wagmi": "^0.3.4",
+    "web3": "^1.7.3"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.1.3",
