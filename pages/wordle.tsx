@@ -9,6 +9,7 @@ import { flatten } from "ramda";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from "../components/Layout";
+import { trackGoal } from 'fathom-client';
 
 
 export default function Hodle() {
@@ -144,6 +145,7 @@ export default function Hodle() {
             setRewardModal(true)
           }
       });
+      trackGoal("0KPWBU3S", 0);
     } else {
       if (isLastRow) {
         toast.error(`The word was ${secret}.`, {
@@ -152,6 +154,7 @@ export default function Hodle() {
               resetGame()
             }
         });
+        trackGoal("C5K6H6HH", 0);
       }
     }
 
@@ -169,6 +172,7 @@ export default function Hodle() {
     const result = await api.getSecretWord();
     setSecret(result.secret)
     setIsLoading(false)
+    trackGoal("UPZ0IHDT", 0);
   }
 
   const usedKeys = []

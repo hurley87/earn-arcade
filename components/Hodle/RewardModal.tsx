@@ -4,7 +4,7 @@ import {
 } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useState } from 'react';
-
+import { trackGoal } from 'fathom-client';
 
 export type Props = Pick<ModalProps, 'open' | 'onClose'>
 
@@ -35,15 +35,19 @@ export default function HelpModal(props: Props) {
       if('error' in response) {
         setError(true)
         setTransactionHash(null)
+        trackGoal("2BKN2Q8G", 0);
       } else {
-        const { transactionHash } = await res.json();
+        const transactionHash = response.transactionHash;
         setTransactionHash(transactionHash)
+        trackGoal("2PYDAEBY", 0);
       }
 
       setTransactionLoading(false)
     } catch(e) {
+      console.log(e)
       setTransactionLoading(false)
       setError(true)
+      trackGoal("2BKN2Q8G", 0);
     }    
   }
 
