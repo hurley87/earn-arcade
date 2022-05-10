@@ -14,6 +14,11 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
             rel="stylesheet"
           />
+          <link
+            rel="preconnect"
+            href="https://cdn.usefathom.com"
+            crossOrigin=""
+          />
         </Head>
         <body>
           <Main />
