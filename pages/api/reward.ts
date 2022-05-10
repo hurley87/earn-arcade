@@ -26,22 +26,24 @@ export default async function handler(
           gasPrice: await web3.eth.getGasPrice(),
         })
         .catch(err => {
+          console.log("ERROR")
           console.log(err)
           if (
             err.message ===
             'Returned error: insufficient funds for gas * price + value'
           ) {
-            throw new Error(
-              'Faucet balance is too low, please try again later or consider donating (please!)',
-            );
+            console.log('hello!')
+            return res.status(400).json({ error: "No rewards are left today. Check back tomorrow!" });
           }
           throw err;
         });
       
-      const transactionHash = receipt.transactionHash
-      console.log(transactionHash)
-
-      res.status(200).json({ transactionHash })
+      if(receipt) {
+        const transactionHash = receipt.transactionHash
+        console.log(transactionHash)
+  
+        res.status(200).json({ transactionHash })
+      }
     } catch {
         return res.status(400).json({ error: "Wallet is required" });
     }

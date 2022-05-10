@@ -31,10 +31,17 @@ export default function HelpModal(props: Props) {
         method: "POST",
       });
 
-      const { transactionHash } = await res.json();
-      setTransactionHash(transactionHash)
+      const response = await res.json();
+      if('error' in response) {
+        setError(true)
+        setTransactionHash(null)
+      } else {
+        const { transactionHash } = await res.json();
+        setTransactionHash(transactionHash)
+      }
+
       setTransactionLoading(false)
-    } catch {
+    } catch(e) {
       setTransactionLoading(false)
       setError(true)
     }    
@@ -48,11 +55,16 @@ export default function HelpModal(props: Props) {
   return (
     <Modal title="Claim Your Reward" open={props.open} onClose={props.onClose}>
       <section className="grid gap-4">
-        <header className="grid gap-2 md:gap-3">
-          <p className="text-sm text-slate-800 dark:text-slate-200">
-            We want to send you 1 $MATIC for your efforts. The transaction will take about a minute to complete after you claim it.
-          </p>
-        </header>
+        {
+          !error && (
+            <header className="grid gap-2 md:gap-3">
+              <p className="text-sm text-slate-800 dark:text-slate-200">
+                We want to send you 1 $MATIC for your efforts. The transaction will take about a minute to complete after you claim it.
+              </p>
+            </header>
+          )
+        }
+
         {
           account ? (
             <>
@@ -68,24 +80,32 @@ export default function HelpModal(props: Props) {
                   {
                     transactionHash ? (
                       <>
-                        {
-                          error ? (
-                            <p>Something went wrong 😔 DM <a target="_blank" href={`https://twitter.com/davidhurley87`} className="text-pink-500 text-md font-bold pb-1">@davidhurley87</a></p>
-                          ) : (
-                            <a target="_blank" href={`https://polygonscan.com/tx/${transactionHash}`} className="text-pink-500 text-md font-bold pb-1">
-                              Success! View transaction or play again.
-                            </a>
-                          )
-                        }
+                        <a target="_blank" href={`https://polygonscan.com/tx/${transactionHash}`} className="text-pink-500 text-md font-bold pb-1">
+                          Success! View transaction or play again.
+                        </a>
                         <button onClick={() => playAgain()} className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded">
-                          { error ? <p>Try again</p> : <p>Play again</p>} 
+                          <p>Play again</p>
                         </button>
                       </>
 
                     ) : (
-                      <button onClick={() => claimReward()} className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded">
-                        <p>Claim 1 $MATIC</p>
-                      </button>
+                      <>
+                      {
+                        error ? (
+                          <>
+                            <p>Sorry, no more rewards today 😔 Check back tomorrow.</p>
+                            <button onClick={() => playAgain()} className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded">
+                              <p>Play again</p>
+                            </button>
+                          </>
+                        ) : (
+                          <button onClick={() => claimReward()} className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded">
+                            <p>Claim 1 $MATIC</p>
+                          </button>
+                        )
+                      }
+                      </>
+
                     )
                   }
                 </>
