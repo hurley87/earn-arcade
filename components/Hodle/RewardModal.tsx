@@ -68,11 +68,17 @@ export default function HelpModal(props: Props) {
                   {
                     transactionHash ? (
                       <>
-                        <a target="_blank" href={`https://polygonscan.com/tx/${transactionHash}`} className="text-pink-500 text-md font-bold pb-1">
-                          Success! View transaction or play again.
-                        </a>
+                        {
+                          error ? (
+                            <p>Something went wrong 😔 DM <a target="_blank" href={`https://twitter.com/davidhurley87`} className="text-pink-500 text-md font-bold pb-1">@davidhurley87</a></p>
+                          ) : (
+                            <a target="_blank" href={`https://polygonscan.com/tx/${transactionHash}`} className="text-pink-500 text-md font-bold pb-1">
+                              Success! View transaction or play again.
+                            </a>
+                          )
+                        }
                         <button onClick={() => playAgain()} className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded">
-                          <p>Play again</p>
+                          { error ? <p>Try again</p> : <p>Play again</p>} 
                         </button>
                       </>
 
@@ -85,9 +91,7 @@ export default function HelpModal(props: Props) {
                 </>
               )
             }
-
             </>
-
           ) : (
             <div className='bg-pink-500 hover:bg-pink-400 text-white text-lg font-bold py-0 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded mx-auto'>
                <ConnectButton />
