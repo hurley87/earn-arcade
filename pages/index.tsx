@@ -13,6 +13,11 @@ const IndexPage = () => {
           </button>
         </Link>
       </div>
+      <footer className='h-15 absolute bottom-0 left-0 right-0'>
+        <div className='text-center w-full lg:w-11/12 mx-auto px-4 text-white'>
+          <p className='text-xs md:text-lg pb-4'>Built with help from <a className='text-pink-500 border-b-2 border-pink-500' href="https://www.milkroad.com/subscribe?ref=u40ryDPPBO" target="_blank">Milk Road</a></p>
+        </div>
+      </footer>
     </Layout>
   )
 }
