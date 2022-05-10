@@ -43,8 +43,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     //  - Do not include https://
     //  - This must be an exact match of your domain.
     //  - If you're using www. for your domain, make sure you include that here.
-    Fathom.load('DRPQZPZD', {
-      includedDomains: ['earnarcade.xyz'],
+    Fathom.load('JYEJRHHV', {
+      includedDomains: ['earnarcade.xyz', 'www.earnarcade.xyz'],
     });
 
     function onRouteChangeComplete() {
