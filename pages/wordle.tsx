@@ -53,7 +53,6 @@ export default function Hodle() {
   }
 
   function deleteGuess() {
-
     const newGrid = grid
     const lastNonEmptyTile = findLastNonEmptyTile(
         grid[cursor.y]
