@@ -17,7 +17,6 @@ const Logo = () => {
         });
 
         const response = await res.json();
-        console.log(response)
         setMatic(response.amount)
     }
     loadMatic()
