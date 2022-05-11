@@ -1,8 +1,18 @@
+import data from './db.json'
+
 export async function getSecretWord() {
-  return await fetch("/api/secret").then((x) => x.json());
+  const { items } = data
+  const secret = items[Math.floor(Math.random() * items.length)];
+
+  return {secret};
 }
 
 export async function verifyWord(word: string) {
-  console.log(word)
-  return await fetch(`/api/verify/${word}`).then((x) => x.json());
+  const { items } = data;
+  const valid =
+    word && word.length === 5 ? items.includes(word) : false;
+
+  return {valid};
 }
+
+
