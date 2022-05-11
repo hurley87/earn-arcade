@@ -3,5 +3,6 @@ export async function getSecretWord() {
 }
 
 export async function verifyWord(word: string) {
+  console.log(word)
   return await fetch(`/api/verify/${word}`).then((x) => x.json());
 }

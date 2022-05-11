@@ -103,15 +103,15 @@ export default function Hodle() {
     }
 
     try {
-        const result = await api.verifyWord(guessWord);
-        if (!result.valid) {
-          toast.error(`Not in word list: ${guessWord}`, {
-              position: "top-center",
-          });
-          return {
-            status: "playing",
-          };
-        }
+      const result = await api.verifyWord(guessWord);
+      if (!result.valid) {
+        toast.error(`Not in word list: ${guessWord}`, {
+            position: "top-center",
+        });
+        return {
+          status: "playing",
+        };
+      }
     } catch (error) {
         console.log("Failed to verify word: %e", error);
     }
