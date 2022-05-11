@@ -11,11 +11,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { items } = data;
-
   const word = String(req.query.word);
-
   const valid =
     word && word.length === 5 ? items.includes(word) : false;
+  console.log(valid)
 
   res.status(200).json({ valid });
 }
