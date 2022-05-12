@@ -37,7 +37,6 @@ export default async function handler(
       
       if(receipt) {
         const transactionHash = receipt.transactionHash
-  
         res.status(200).json({ transactionHash })
       }
     } catch {

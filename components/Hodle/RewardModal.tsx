@@ -3,7 +3,7 @@ import {
   useAccount,
 } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { trackGoal } from 'fathom-client';
 
 export type Props = Pick<ModalProps, 'open' | 'onClose'>
@@ -12,7 +12,26 @@ export default function HelpModal(props: Props) {
   const { data: account } = useAccount() 
   const [transactionHash, setTransactionHash] = useState(null)
   const [transactionLoading, setTransactionLoading] = useState(false)
-  const [error, setError] = useState(false)
+  const [noRewards, setNoRewards] = useState(false)
+
+  useEffect(() => {
+    async function loadRewards() {
+        const res = await fetch("/api/matic", {
+            body: JSON.stringify({
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+        });
+
+        const response = await res.json();
+        const noRewards = response.amount === 0;
+        console.log(noRewards)
+        setNoRewards(noRewards)
+    }
+    loadRewards()
+  })
 
   async function claimReward() {
     const address = account?.address;
@@ -33,7 +52,7 @@ export default function HelpModal(props: Props) {
 
       const response = await res.json();
       if('error' in response) {
-        setError(true)
+        // set proper error message here
         setTransactionHash(null)
         trackGoal("2BKN2Q8G", 0);
       } else {
@@ -41,12 +60,11 @@ export default function HelpModal(props: Props) {
         setTransactionHash(transactionHash)
         trackGoal("2PYDAEBY", 0);
       }
-
       setTransactionLoading(false)
     } catch(e) {
       console.log(e)
       setTransactionLoading(false)
-      setError(true)
+      // set error message here
       trackGoal("2BKN2Q8G", 0);
     }    
   }
@@ -57,10 +75,10 @@ export default function HelpModal(props: Props) {
   }
 
   return (
-    <Modal title="Claim Your Reward" open={props.open} onClose={props.onClose}>
-      <section className="grid gap-4">
+    <Modal title= { noRewards ? "No Rewards Left" : "Claim Your Reward"}  open={props.open} onClose={props.onClose}>
+      <section className="grid gap-4 p-2">
         {
-          !error && (
+          !noRewards && (
             <header className="grid gap-2 md:gap-3">
               <p className="text-sm text-slate-800 dark:text-slate-200">
                 We want to send you 1 $MATIC for your efforts. The transaction will take about a minute to complete after you claim it.
@@ -95,13 +113,13 @@ export default function HelpModal(props: Props) {
                     ) : (
                       <>
                       {
-                        error ? (
-                          <>
-                            <p>Sorry, no more rewards today 😔 Check back tomorrow.</p>
-                            <button onClick={() => playAgain()} className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded">
+                        noRewards ? (
+                          <div className='px-4'>
+                            <p>There's more where that came from. Check back tomorrow.</p>
+                            <button onClick={() => playAgain()} className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded mt-6">
                               <p>Play again</p>
                             </button>
-                          </>
+                          </div>
                         ) : (
                           <button onClick={() => claimReward()} className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded">
                             <p>Claim 1 $MATIC</p>
