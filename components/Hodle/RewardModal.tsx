@@ -109,7 +109,6 @@ export default function HelpModal(props: Props) {
                           <p>Play again</p>
                         </button>
                       </>
-
                     ) : (
                       <>
                       {
