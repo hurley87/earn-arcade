@@ -12,6 +12,8 @@ export default async function handler(
     let privateKey:string = process.env.PRIVATE_KEY || '';
     web3.eth.accounts.wallet.add(privateKey);
     
+    console.log(address)
+    
     if (!address) {
       return res.status(400).json({ error: "Wallet is required" });
     }
@@ -34,12 +36,15 @@ export default async function handler(
           }
           throw err;
         });
+
+      console.log(receipt)
       
       if(receipt) {
         const transactionHash = receipt.transactionHash
         res.status(200).json({ transactionHash })
       }
-    } catch {
-        return res.status(400).json({ error: "Wallet is required" });
+    } catch(e) {
+      console.log(e)
+      return res.status(400).json({ error: "Wallet is required" });
     }
 }
