@@ -10,7 +10,7 @@ export type Props = Pick<ModalProps, 'open' | 'onClose'>
 
 export default function HelpModal(props: Props) {
   const { data: account } = useAccount() 
-  const [transactionHash, setTransactionHash] = useState(null)
+  const [transactionHash, setTransactionHash] = useState("")
   const [transactionLoading, setTransactionLoading] = useState(false)
   const [noRewards, setNoRewards] = useState(false)
   const [error, setError] = useState(false)
@@ -71,7 +71,7 @@ export default function HelpModal(props: Props) {
   }
 
   function playAgain() {
-    setTransactionHash(null)
+    setTransactionHash("")
     setError(false)
     props.onClose(true)
   }
@@ -80,7 +80,7 @@ export default function HelpModal(props: Props) {
     <Modal title= { noRewards ? "No Rewards Left" : "Claim Your Reward"}  open={props.open} onClose={props.onClose}>
       <section className="grid gap-4">
         {
-          !noRewards && !transactionHash &&  (
+          !noRewards && transactionHash === "" &&  (
             <header className="grid gap-2 md:gap-3">
               <p className="text-sm text-slate-800 dark:text-slate-200 pb-2">
                 Blockchains can be slow. That's why it may take a minute for you to receive your reward once you claim it.
@@ -102,7 +102,7 @@ export default function HelpModal(props: Props) {
               ) : (
                 <>
                   {
-                    transactionHash ? (
+                    transactionHash !== "" ? (
                       <>
                         <p className='pb-2'><a target="_blank" href={ error ? "https://polygonscan.com/address/0x1a8912a243c2b70204f607f6cc20b94543664c30" : `https://polygonscan.com/tx/${transactionHash}`} className="text-pink-500 text-md font-bold pb-4">Success</a>! It was a pleasure doing business with you. See where you rank on the <a href="/leaderboard" className="text-pink-500 text-md font-bold pb-4">leaderboard</a> or play again.</p>
                         
