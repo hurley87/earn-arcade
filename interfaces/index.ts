@@ -23,3 +23,15 @@ export type GameTile = {
 export type GameGrid = GameTile[][];
 
 export type GameStatus = "new" | "won" | "lost";
+
+export type Transaction = {
+  to: string
+  from: string
+  value: string
+  timeStamp: string
+}
+
+export type Player = {
+  wallet: string
+  score: number
+}
