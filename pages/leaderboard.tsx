@@ -11,7 +11,6 @@ function formatWallet(wallet: string) {
     return wallet.slice(0, 4) + "..." + wallet.slice(-4);
 }
   
-  
 export default function Leaderboard({ transactions }: Props) {
     const data: {[key:string]: number} = {}
     for (const i in transactions) {

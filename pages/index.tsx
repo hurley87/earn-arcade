@@ -10,7 +10,7 @@ const IndexPage = () => {
         <p className='text-xl md:text-2xl pt-4'>Solve Puzzles and Earn $MATIC.</p>
         <Link href="/wordle">
           <button className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded mt-6">
-            Solve Wordle and earn 1 $MATIC
+            Solve W3rdle and earn 1 $MATIC
           </button>
         </Link>
       </div>
