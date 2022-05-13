@@ -35,7 +35,7 @@ export default function Leaderboard({ transactions }: Props) {
 
     return (
         <Layout title="Leaderboard | See where you rank">
-            <div className="max-w-sm mx-auto w-full px-2 pb-36">
+            <div className="max-w-sm mx-auto w-full px-1 pb-36 pt-6 md:pt-0">
                 <div className='bg-pink-500 w-full flex justify-between text-white text-2xl rounded-md p-2 mb-4'>
                     <p className='text-left font-bold'>Total</p>
                     <p className='text-right font-bold'>{players.reduce((a, b) => a + b.score, 0)} $MATIC</p>
