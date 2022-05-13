@@ -4,8 +4,8 @@ import Link from 'next/link'
 const IndexPage = () => {
   return (
     <Layout title="Arcade">
-      <div className='text-center pt-4'>
-      <p className='text-xs md:text-lg pb-4'><a className='text-pink-500 border-b-2 border-pink-500 pb-1 mb-8' href="/leaderboard">See how much people are earning</a></p>
+      <div className='text-center pt-8'>
+      <p className='text-md md:text-lg pb-4'><a className='text-pink-500 border-b-2 border-pink-500 pb-1 mb-8' href="/leaderboard">See how much people are earning</a></p>
         <h1 className='text-4xl md:text-6xl font-bold max-w-xl mx-auto pt-2'>Get Paid to Play Games Online</h1>
         <p className='text-xl md:text-2xl pt-4'>Solve Puzzles and Earn $MATIC.</p>
         <Link href="/wordle">
