@@ -63,7 +63,6 @@ export const getStaticProps: GetStaticProps = async ({  }) => {
     const POLY_API_KEY = process.env.POLY_API_KEY;
 
     let transactions = []
-
     try {
         const API_URL = `https://api.polygonscan.com/api?module=account&action=txlist&address=${process.env.WALLET_ID}&startblock=0&endblock=99999999&page=1&sort=des&apikey=${POLY_API_KEY}`
         const res = await fetch(API_URL, {
@@ -87,7 +86,6 @@ export const getStaticProps: GetStaticProps = async ({  }) => {
     } catch(e) {
         console.log(e)
     }
-
 
     return {
         props: {
