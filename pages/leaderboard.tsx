@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps = async ({  }) => {
     let transactions = []
 
     try {
-        const API_URL = `https://api.polygonscan.com/api?module=account&action=txlist&address=0x1A8912a243C2b70204f607F6CC20B94543664C30&startblock=0&endblock=99999999&page=1&sort=des&apikey=${POLY_API_KEY}`
+        const API_URL = `https://api.polygonscan.com/api?module=account&action=txlist&address=${process.env.WALLET_ID}&startblock=0&endblock=99999999&page=1&sort=des&apikey=${POLY_API_KEY}`
         const res = await fetch(API_URL, {
             headers: {
                 "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export const getStaticProps: GetStaticProps = async ({  }) => {
         });
     
         const response = await res.json();
-        transactions = response.result.filter((transaction: Transaction) => transaction.from === "0x1a8912a243c2b70204f607f6cc20b94543664c30").map((transaction: Transaction)  => {
+        transactions = response.result.filter((transaction: Transaction) => transaction.from === process.env.WALLET_ID).map((transaction: Transaction)  => {
             const value = parseInt(web3.utils.fromWei(transaction['value'], 'ether'))
             return {
                 to: transaction['to'],

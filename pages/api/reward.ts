@@ -27,8 +27,7 @@ export default async function handler(
         })
         .catch(err => {
           if (
-            err.message ===
-            'Returned error: insufficient funds for gas * price + value'
+            err
           ) {
             return res.status(400).json({ error: "No rewards are left today. Check back tomorrow!" });
           }
