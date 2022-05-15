@@ -77,7 +77,7 @@ export default function HelpModal(props: Props) {
   }
 
   return (
-    <Modal title= { noRewards ? "No Rewards Left" : "Claim Your Reward"}  open={props.open} onClose={props.onClose}>
+    <Modal title="Claim Your Reward" open={props.open} onClose={props.onClose}>
       <section className="grid gap-4">
         {
           !noRewards && transactionHash === "" &&  (
@@ -104,7 +104,7 @@ export default function HelpModal(props: Props) {
                   {
                     transactionHash !== "" ? (
                       <>
-                        <p className='pb-2'><a target="_blank" href={ error || !transactionHash ? `https://polygonscan.com/address/${process.env.WALLET_ID}` : `https://polygonscan.com/tx/${transactionHash}`} className="text-pink-500 text-md font-bold pb-4">Success</a>! It was a pleasure doing business with you. See where you rank on the <a href="/leaderboard" className="text-pink-500 text-md font-bold pb-4">leaderboard</a> or play again.</p>
+                        <p className='pb-2'><a target="_blank" href={ error || !transactionHash ? `https://polygonscan.com/address/${process.env.WALLET_ID}` : `https://polygonscan.com/tx/${transactionHash}`} className="text-pink-500 text-md font-bold pb-4">View your transaction</a>. See where you rank on the <a href="/leaderboard" className="text-pink-500 text-md font-bold pb-4">leaderboard</a> or play again.</p>
                         
                         <button onClick={() => playAgain()} className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded">
                           <p>Play again</p>
@@ -114,9 +114,9 @@ export default function HelpModal(props: Props) {
                       <>
                       {
                         noRewards ? (
-                          <div className='px-4'>
-                            <p>There's more where that came from. Check back tomorrow.</p>
-                            <button onClick={() => playAgain()} className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded mt-6">
+                          <div className=''>
+                            <p>No rewards right now but there's more where that came from. Check back tomorrow.</p>
+                            <button onClick={() => playAgain()} className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded mt-6 w-full">
                               <p>Play again</p>
                             </button>
                           </div>

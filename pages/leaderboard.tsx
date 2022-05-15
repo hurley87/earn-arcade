@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next'
 import Layout from '../components/Layout'
 import type { Transaction, Player } from "../interfaces"
 import Web3 from 'web3';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Props {
     transactions: Transaction[]
@@ -12,10 +12,18 @@ interface Props {
 function formatWallet(wallet: string) {
     return wallet.slice(0, 4) + "..." + wallet.slice(-4);
 }
-  
-export default function Leaderboard({ transactions, price }: Props) {
-    const [denomination, setDenomination] = useState<string>("MATIC")
 
+function isTimeStampToday(timeStamp: string) {
+    const timeStampDate = new Date(parseInt(timeStamp)*1000)
+    const timeStampDay = timeStampDate.getDate()
+    const timeStampMonth = timeStampDate.getMonth()
+    const today = new Date()
+    const todayDay = today.getDate()
+    const todayMonth = today.getMonth()
+    return timeStampDay === todayDay && timeStampMonth === todayMonth
+}
+
+function convertTransactionsToPlayers(transactions: Transaction[]) {
     const data: {[key:string]: number} = {}
     for (const i in transactions) {
         const transactionTo:string = transactions[i].to;
@@ -34,19 +42,57 @@ export default function Leaderboard({ transactions, price }: Props) {
                 score: data[key]
             })
         }
-    })
+    }) 
+
+    return players;
+}
+  
+export default function Leaderboard({ transactions, price }: Props) {
+    const [denomination, setDenomination] = useState<string>("MATIC")
+    const [isDaily, setIsDaily] = useState<boolean>(true)
+    const [players, setPlayers] = useState<Player[]>([])
+    const [total, setTotal] = useState<number>(0)
+
+    useEffect(() => {
+        const players = convertTransactionsToPlayers(transactions.filter(transaction => isTimeStampToday(transaction.timeStamp)))
+        const total = players.reduce((a, b) => a + b.score, 0)
+        setTotal(total)
+        setPlayers(players)
+
+    }, [transactions])
 
     function changeDenomination() {
         denomination === 'MATIC' ? setDenomination('USD') : setDenomination('MATIC')
     }
 
-    const total = players.reduce((a, b) => a + b.score, 0)
+    function updateDaily() {
+        setIsDaily(!isDaily)
+        if(!isDaily) {
+            const players = convertTransactionsToPlayers(transactions.filter(transaction => isTimeStampToday(transaction.timeStamp)))
+            const total = players.reduce((a, b) => a + b.score, 0)
+            setTotal(total)
+            setPlayers(players)
+        } else {
+            const players = convertTransactionsToPlayers(transactions)
+            const total = players.reduce((a, b) => a + b.score, 0)
+            setTotal(total)
+            setPlayers(players)
+        }
+    }
 
     return (
         <Layout title="Leaderboard | See where you rank">
             <div className="max-w-sm mx-auto w-full px-1 pb-36 pt-6 md:pt-0">
+            <div className="flex rounded-md shadow-sm mb-6 text-center px-4 shadow-xl">
+                <div onClick={() => updateDaily()} className={`w-1/2 py-2 text-sm ${ isDaily ? "text-pink-500 border-b-2 border-pink-500" : "text-white hover:text-gray-200 border-b-2 border-white cursor-pointer"}`}>
+                    Daily
+                </div>
+                <div onClick={() => updateDaily()} className={`w-1/2 py-2 text-sm ${ isDaily ? "text-white hover:text-gray-200 border-b-2 border-white cursor-pointer" : "text-pink-500 border-b-2 border-pink-500"}`}>
+                    All Time
+                </div>
+            </div>
                 <div className='mx-4'>
-                    <div onClick={() => changeDenomination()} className='bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded flex justify-between text-white text-md rounded-md p-2 md:mb-8 cursor-pointer shadow-xl'>
+                    <div onClick={() => changeDenomination()} className='bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded flex justify-between text-white text-md rounded-md p-2 md:mb-6 cursor-pointer shadow-xl'>
                         <p className='text-left font-bold'>Total Earnings</p>
                         <p className='text-right font-bold'>{denomination === 'MATIC' ? total : (total * price).toFixed(2)} ${denomination}</p>
                     </div>
@@ -89,11 +135,14 @@ export const getStaticProps: GetStaticProps = async ({  }) => {
         const response = await res.json();
         transactions = response.result.filter((transaction: Transaction) => transaction.from === process.env.WALLET_ID).map((transaction: Transaction)  => {
             const value = parseInt(web3.utils.fromWei(transaction['value'], 'ether'))
+
+
+
             return {
                 to: transaction['to'],
                 from: transaction['from'],
                 value,
-                timeStamp: transaction['timeStamp'],
+                timeStamp: transaction['timeStamp']
             }
         })
         
