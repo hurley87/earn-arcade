@@ -21,7 +21,7 @@ const Layout = ({ children, title = 'Arcade | Play games and earn $MATIC' }: Pro
       <Logo />
       <ConnectButton />
     </div>
-    <div className='w-full md:w-11/12 mx-auto text-white'>
+    <div className='w-full md:w-11/12 mx-auto text-white pt-6 md:pt-0'>
       {children}
     </div>
   </div>
