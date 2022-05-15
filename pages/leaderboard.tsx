@@ -42,7 +42,7 @@ function convertTransactionsToPlayers(transactions: Transaction[]) {
                 score: data[key]
             })
         }
-    }) 
+    })
 
     return players;
 }
@@ -54,40 +54,37 @@ export default function Leaderboard({ transactions, price }: Props) {
     const [total, setTotal] = useState<number>(0)
 
     useEffect(() => {
-        const players = convertTransactionsToPlayers(transactions.filter(transaction => isTimeStampToday(transaction.timeStamp)))
+        setDaily();
+    }, [transactions])
+
+    function setLeaderboard(transactions: Transaction[], isDaily: boolean) {
+        const players = convertTransactionsToPlayers(transactions)
         const total = players.reduce((a, b) => a + b.score, 0)
         setTotal(total)
         setPlayers(players)
+        setIsDaily(isDaily)
+    }
 
-    }, [transactions])
+    function setDaily() {
+        setLeaderboard(transactions.filter(transaction => isTimeStampToday(transaction.timeStamp)), true)
+    }
+
+    function setAllTime() {
+        setLeaderboard(transactions, false)
+    }
 
     function changeDenomination() {
         denomination === 'MATIC' ? setDenomination('USD') : setDenomination('MATIC')
-    }
-
-    function updateDaily() {
-        setIsDaily(!isDaily)
-        if(!isDaily) {
-            const players = convertTransactionsToPlayers(transactions.filter(transaction => isTimeStampToday(transaction.timeStamp)))
-            const total = players.reduce((a, b) => a + b.score, 0)
-            setTotal(total)
-            setPlayers(players)
-        } else {
-            const players = convertTransactionsToPlayers(transactions)
-            const total = players.reduce((a, b) => a + b.score, 0)
-            setTotal(total)
-            setPlayers(players)
-        }
     }
 
     return (
         <Layout title="Leaderboard | See where you rank">
             <div className="max-w-sm mx-auto w-full px-1 pb-36 pt-6 md:pt-0">
             <div className="flex rounded-md shadow-sm mb-6 text-center px-4 shadow-xl">
-                <div onClick={() => updateDaily()} className={`w-1/2 py-2 text-sm ${ isDaily ? "text-pink-500 border-b-2 border-pink-500" : "text-white hover:text-gray-200 border-b-2 border-white cursor-pointer"}`}>
+                <div onClick={() => setDaily()} className={`w-1/2 py-2 text-sm ${ isDaily ? "text-pink-500 border-b-2 border-pink-500" : "text-white hover:text-gray-200 border-b-2 border-white cursor-pointer"}`}>
                     Daily
                 </div>
-                <div onClick={() => updateDaily()} className={`w-1/2 py-2 text-sm ${ isDaily ? "text-white hover:text-gray-200 border-b-2 border-white cursor-pointer" : "text-pink-500 border-b-2 border-pink-500"}`}>
+                <div onClick={() => setAllTime()} className={`w-1/2 py-2 text-sm ${ isDaily ? "text-white hover:text-gray-200 border-b-2 border-white cursor-pointer" : "text-pink-500 border-b-2 border-pink-500"}`}>
                     All Time
                 </div>
             </div>

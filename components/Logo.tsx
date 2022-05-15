@@ -20,7 +20,7 @@ const Logo = () => {
         setMatic(response.amount)
     }
     loadMatic()
-  })
+  }, [])
 
   return (
     <Link href="/">
