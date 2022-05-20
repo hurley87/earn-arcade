@@ -120,7 +120,7 @@ const Home: NextPage = () => {
       </Head>
 
       <div className='text-center pt-8 max-w-xl mx-auto'>
-        <p className='text-md md:text-xl pt-4 mx-auto text-white px-2'>Guess the 5-digit number in six or fewer guesses. The <span className='text-pink-600'>sum of the first three digits is  <b>{numbers.slice(0,3).reduce((partialSum, a) => partialSum + a, 0)}</b></span> and the <span className='text-pink-600'>sum of all five is <b>{numbers.reduce((partialSum, a) => partialSum + a, 0)}</b></span>.</p>
+        <p className='text-md md:text-xl pt-4 mx-auto text-white px-2'>Guess the number in six or fewer guesses. The <span className='text-pink-600'>sum of the first three digits is  <b>{numbers.slice(0,3).reduce((partialSum, a) => partialSum + a, 0)}</b></span> and the <span className='text-pink-600'>sum of all five is <b>{numbers.reduce((partialSum, a) => partialSum + a, 0)}</b></span>.</p>
         <div className='m-auto max-w-sm'>
             <p className='text-6xl my-8'>{displayPicks.length === 0 ? "_ _ _ _ _" : picksUI()}</p>
         </div>
