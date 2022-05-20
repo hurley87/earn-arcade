@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import {  useEffect, useState } from 'react'
+import RewardModal from '../components/Hodle/RewardModal';
 import Layout from '../components/Layout';
 
 interface Keypad {
@@ -29,6 +30,7 @@ const Home: NextPage = () => {
   const [picks, setPicks] = useState<number[]>([])
   const [displayPicks, setDisplayPicks] = useState<string[]>([])
   const [timeLeft, setTimeLeft] = useState<number>(9);
+  const [rewardModal, setRewardModal] = useState<boolean>(false)
 
 
   useEffect(() => {
@@ -53,10 +55,13 @@ const Home: NextPage = () => {
   
 
   function pickNumber(number: number) {
+
+    
     if(picks.length === 0) setTimeLeft(9)
     const picksToDisplay: string[] = []
     picks.push(number)
     numbers.map(number => picks.includes(number) ? picksToDisplay.push(number.toString()) : picksToDisplay.push("_"))
+    setRewardModal(!picksToDisplay.includes('_'))
     setPicks([...picks])
     setDisplayPicks([...picksToDisplay])
     if(numbers.includes(number)) {
@@ -143,6 +148,7 @@ const Home: NextPage = () => {
         }
         </div>
       </div>
+      <RewardModal open={rewardModal} onClose={() => setRewardModal(false)}/>
     </Layout>
   )
 }
