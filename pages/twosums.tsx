@@ -29,9 +29,6 @@ const Home: NextPage = () => {
   const [picks, setPicks] = useState<number[]>([])
   const [displayPicks, setDisplayPicks] = useState<string[]>([])
   const [timeLeft, setTimeLeft] = useState<number>(9);
-  const [diff, setDiff] = useState<number>(0);
-  let right = 0
-  let wrong = 0
 
 
   useEffect(() => {
@@ -43,10 +40,6 @@ const Home: NextPage = () => {
       Math.floor(Math.random() * 9),
     ]
     setNumbers(numbers)
-    const min = Math.min( ...numbers )
-    const max = Math.max( ...numbers )
-    const diff = max - min;
-    setDiff(diff)
   }, [])
 
   useEffect(() => {
@@ -69,12 +62,10 @@ const Home: NextPage = () => {
     if(numbers.includes(number)) {
       const updatedKeypad = keypad;
       updatedKeypad[number]['status'] = 'right';
-      right += 1
       setKeypad([...updatedKeypad])
     } else {
       const updatedKeypad = keypad;
       updatedKeypad[number]['status'] = 'wrong';
-      wrong += 1
       setKeypad([...updatedKeypad])
     }
   }
