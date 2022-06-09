@@ -37,7 +37,6 @@ const Submissions: React.FunctionComponent<SubmissionsProps> = ({ game }) => {
         )
       }
       <div className="pb-4">
-      <p className="mb-6 text-center w-full"><a className='text-pink-500 border-b-2 border-pink-500 mb-6' href="https://polygonscan.com/address/0x6357e792d80315b648CDe9A0Ba9ee138A9215e18" target="_blank">Verify contract transactions</a></p>
       <div className="relative text-xs md:text-md xs:max-w-11/12 max-h-80 overflow-x-auto border-2 border-white rounded-md p-2">
         <table className="table-auto mx-auto">
           <thead>
