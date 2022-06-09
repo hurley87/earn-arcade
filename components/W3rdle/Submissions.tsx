@@ -39,7 +39,7 @@ const Submissions: React.FunctionComponent<SubmissionsProps> = ({ game }) => {
         )
       }
       <div className="pb-4 mt-6">
-      <p className=" text-slate-800 dark:text-slate-200 pb-2">
+      <p className="text-white pb-2">
         The winner will be annouced on {moment().format('MMMM Do')} at 8pm EST.
       </p>
       <div className="relative text-xs md:text-md xs:max-w-11/12 max-h-80 overflow-x-auto border-2 border-white rounded-md p-2">
@@ -54,7 +54,7 @@ const Submissions: React.FunctionComponent<SubmissionsProps> = ({ game }) => {
               <th scope="col" className="pl-8 py-4 text-right">Seconds</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody> 
           {
             query.data?.filter(sub => (sub.end - sub.start) > 0).sort((a, b) => {
               return (a.end - a.start) - (b.end - b.start);
