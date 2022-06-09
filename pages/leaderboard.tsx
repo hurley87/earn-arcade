@@ -143,8 +143,7 @@ export const getStaticProps: GetStaticProps = async ({  }) => {
             }
         })
         
-    } catch(e) {
-        console.log(e)
+    } catch{
     }
 
     let price = 0.8
@@ -158,8 +157,7 @@ export const getStaticProps: GetStaticProps = async ({  }) => {
         });
         const response = await res.json();
         price = parseFloat(response.result.maticusd)
-    } catch(e) {
-        console.log(e)
+    } catch {
     }
 
     return {

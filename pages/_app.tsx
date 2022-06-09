@@ -12,11 +12,23 @@ import { chain, createClient, WagmiProvider } from 'wagmi';
 import * as Fathom from "fathom-client";
 import Router, { useRouter } from "next/router";
 import { useEffect } from 'react';
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Toaster } from "react-hot-toast";
+
+
+// Create a react-query client
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false
+    },
+  },
+});
+
 
 Router.events.on("routeChangeComplete", () => {
   Fathom.trackPageview();
 });
-
 
 const { chains, provider } = configureChains(
   [chain.polygon],
@@ -24,7 +36,7 @@ const { chains, provider } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'My RainbowKit App',
+  appName: 'Arcade',
   chains
 });
 
@@ -56,9 +68,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <WagmiProvider client={wagmiClient}>
-      <RainbowKitProvider coolMode chains={chains} theme={midnightTheme()}>
-      <Component {...pageProps} />
-      </RainbowKitProvider>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider coolMode chains={chains} theme={midnightTheme()}>
+          <Component {...pageProps} />
+          <Toaster position="top-right" />
+        </RainbowKitProvider>
+      </QueryClientProvider>
     </WagmiProvider>
   );
 }

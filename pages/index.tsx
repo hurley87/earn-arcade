@@ -5,20 +5,19 @@ const IndexPage = () => {
   return (
     <Layout title="Arcade">
       <div className='text-center pt-8'>
-      <p className='text-md md:text-lg pb-4'><a className='text-pink-500 border-b-2 border-pink-500 pb-1 mb-8' href="/leaderboard">See how much people are earning</a></p>
         <h1 className='text-4xl md:text-6xl font-bold max-w-xl mx-auto pt-2'>Get Paid to Play Games Online</h1>
-        <p className='text-xl md:text-2xl pt-4'>Solve Puzzles and Earn $MATIC.</p>
+        <p className='text-xl md:text-2xl pt-4'>Play W3rdle, Earn $MATIC.</p>
         <div className='max-w-md mx-auto'>
         <Link href="/w3rdle">
-          <button className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded mt-6 shadow-xl">
-            Solve W3rdle and earn 1 $MATIC
+          <button className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded mt-6 shadow-xl mr-4">
+            Play W3rdle
           </button>
         </Link>
-        <Link href="/twosums">
+        {/* <Link href="/twosums">
           <button className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded mt-6 shadow-xl">
-            Solve Two Sums and earn 1 $MATIC
+            Play Two Sums
           </button>
-        </Link>
+        </Link> */}
         </div>
       </div>
       <footer className='h-15 absolute bottom-0 left-0 right-0'>

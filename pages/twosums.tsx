@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import {  useEffect, useState } from 'react'
-import RewardModal from '../components/Hodle/RewardModal';
+import RewardModal from '../components/W3rdle/RewardModal';
 import Layout from '../components/Layout';
 
 interface Keypad {
