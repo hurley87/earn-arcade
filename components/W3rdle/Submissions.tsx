@@ -3,6 +3,7 @@ import useSubmissions from "../../hooks/useHooks";
 import Username from "../Username";
 import * as blockies from 'blockies-ts';
 import useEvents from "../../hooks/useEvents";
+import moment from "moment";
 
 interface SubmissionsProps {
   game: string;
@@ -39,14 +40,15 @@ const Submissions: React.FunctionComponent<SubmissionsProps> = ({ game }) => {
       }
       <div className="pb-4 mt-6">
       <p className=" text-slate-800 dark:text-slate-200 pb-2">
-        The winner will be annouced on June 6th at 8pm EST.
+        The winner will be annouced on {moment().format('MMMM Do')} at 8pm EST.
       </p>
       <div className="relative text-xs md:text-md xs:max-w-11/12 max-h-80 overflow-x-auto border-2 border-white rounded-md p-2">
         <table className="table-auto mx-auto">
-          <thead>
+          <thead className="border-b-2 border-white">
             <tr>
-              <th scope="col">Rank</th>
-              <th scope="col" className="px-8 py-4 text-left">Player</th>
+              <th scope="col">Player</th>
+              <th />
+              <th />
               <th scope="col" className="px-8 py-4 text-left">Answer</th>
               <th scope="col" className="px-8 py-4 text-left">Minutes</th>
               <th scope="col" className="pl-8 py-4 text-right">Seconds</th>
@@ -59,14 +61,15 @@ const Submissions: React.FunctionComponent<SubmissionsProps> = ({ game }) => {
             }).map((submission, i) => (
               <tr>
                 <td>{i + 1}</td>
-                <td className="px-8 py-4">
+
+                <td className="py-4">
                   <div className="flex">
-                    <div className="w-6 h-6 mr-2">
+                    <div className="w-8 h-8 mr-2">
                       <img className="rounded-full mr-4" src={blockies.create({ seed: submission.creator_address }).toDataURL()} />
                     </div>
-                    <Username address={submission.creator_address}/>
                   </div>
                 </td>
+                <td className="pr-8 py-4 text-left"><Username address={submission.creator_address}/></td>
                 <td className="px-8 py-4 text-left">
                   {submission.answer}
                 </td>

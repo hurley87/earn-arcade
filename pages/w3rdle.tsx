@@ -30,7 +30,6 @@ export default function W3rdle() {
   const [isWinner, setIsWinner] = useState(false)
   const [startTime, setStartTime] = useState(date.getTime())
   const [endTime, setEndTime] = useState(date.getTime())
-  const [matic, setMatic] = useState(0.0)
   const submitMutation = useAddSubmission();
   const admitMutation = useAdmission();
   const { data } = useAccount()
@@ -38,7 +37,7 @@ export default function W3rdle() {
     addressOrName: data?.address,
   })
   const [rewardModal, setRewardModal] = useState(false)
-  const hasMatic = parseInt(balance?.data?.formatted) > 1
+  const hasMatic = parseFloat(balance?.data?.formatted) > 1
   const submissionsQuery = useSubmissions({ game });
 
   useEffect(() => {
@@ -46,17 +45,6 @@ export default function W3rdle() {
         setIsLoading(true)
         const result = await api.getSecretWord();
         setSecret(result.secret)
-        const res = await fetch("/api/matic", {
-          body: JSON.stringify({
-          }),
-          headers: {
-              "Content-Type": "application/json",
-          },
-          method: "POST",
-      });
-
-      const response = await res.json();
-      setMatic(response.amount)
       setIsLoading(false)
 
     }
@@ -168,15 +156,13 @@ export default function W3rdle() {
     }
 
     if (won) {
-
+      toast.success("You win!")
       if(hasMatic) {
         setIsWinner(true)
-        toast.success("You win!")
         const date = new Date()
         setEndTime(date.getTime())
       } else {
         resetGame()
-        toast.success("You win! If")
         setRewardModal(true)
       }
 
@@ -234,12 +220,12 @@ export default function W3rdle() {
       .catch(() => toast.error(`There was a error submitting your score.`))
   }
 
-  console.log(secret)
-
   return (
     <Layout>
       {
-        hasMatic ? (
+        (submissionsQuery?.data?.filter(sub => sub.creator_address === data?.address).length > 0) 
+        ? <div className="px-2 pt-2 sm:max-w-xl mx-auto"><Submissions game={game}/></div> 
+        : hasMatic ? (
           <div className="mx-auto">
           {
             !submissionsQuery.isSuccess ? (
@@ -252,16 +238,14 @@ export default function W3rdle() {
               </div>
             </div>
             ) :
-            (submissionsQuery.data.filter(sub => sub.creator_address === data?.address).length > 0) 
-            ? <div className="px-2 pt-2 sm:max-w-xl mx-auto"><Submissions game={game}/></div> 
-            : (
+             (
               <>
               {
                 (admitMutation.isError || admitMutation.isIdle) && (
-                  <section className="grid gap-4 pt-10 sm:max-w-xl mx-auto">
+                  <section className="grid gap-4 pt-2 sm:max-w-xl mx-auto">
                     <div className="grid gap-2 md:gap-3">
                       <p className=" text-slate-800 dark:text-slate-200">
-                       Earn 50 $MATIC by solving W3rdle in the fastest time.
+                       Win 50 $MATIC by solving W3rdle in the fastest time.
                       </p>
                       <button onClick={() => startGame()} className="bg-pink-500 boldest hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded w-full">
                         {admitMutation.isError ? "Try Again" : `Pay $1 MATIC to Play`} 
@@ -273,7 +257,7 @@ export default function W3rdle() {
               }
               {
                 admitMutation.isLoading && (
-                  <div className="px-2 pt-2 sm:max-w-sm mx-auto">Confirm your $1 MATIC admission fee ...
+                  <div className="px-2 pt-2 sm:max-w-sm mx-auto">Processing your admission fee. After confirming the transaction in your wallet it may take up to a minute to process.
                     <div className="mx-auto max-w-lg text-center mt-4">
                       <svg role="status" className="w-8 h-8 mr-2 text-white animate-spin dark:text-white fill-pink-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
@@ -291,7 +275,7 @@ export default function W3rdle() {
                         <>
                         {
                           (submitMutation.isIdle || submitMutation.isError) && (
-                            <section className="grid gap-4 px-2 pt-10 sm:max-w-sm mx-auto">
+                            <section className="grid gap-4 px-2 pt-2 sm:max-w-sm mx-auto">
                               <div className="grid gap-2 md:gap-3">
                                 <p className=" text-slate-800 dark:text-slate-200 pb-2">
                                   Congrats! You guessed {secret} in {((((endTime - startTime)/1000)%3600)%60).toFixed(2)} seconds. Submit your time for a chance to win. 
