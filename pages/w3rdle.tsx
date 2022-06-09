@@ -38,7 +38,7 @@ export default function W3rdle() {
     addressOrName: data?.address,
   })
   const [rewardModal, setRewardModal] = useState(false)
-  const hasMatic = parseInt(balance?.data?.formatted) > 0
+  const hasMatic = parseInt(balance?.data?.formatted) > 1
   const submissionsQuery = useSubmissions({ game });
 
   useEffect(() => {
@@ -171,7 +171,7 @@ export default function W3rdle() {
 
       if(hasMatic) {
         setIsWinner(true)
-        toast.success("You win! Now save your time for a chance to win the grand daily prize.")
+        toast.success("You win!")
         const date = new Date()
         setEndTime(date.getTime())
       } else {
@@ -216,7 +216,7 @@ export default function W3rdle() {
   async function startGame() {
     admitMutation
     .mutateAsync()
-    .catch((e) => toast.error(`There was a error admitting you: ${e.message}`))
+    .catch((e) => toast.error(`Payment failed. Please try again.`))
 
     const date = new Date()
     const startTime = date.getTime()
@@ -233,6 +233,8 @@ export default function W3rdle() {
       })
       .catch(() => toast.error(`There was a error submitting your score.`))
   }
+
+  console.log(secret)
 
   return (
     <Layout>
@@ -256,15 +258,16 @@ export default function W3rdle() {
               <>
               {
                 (admitMutation.isError || admitMutation.isIdle) && (
-                  <section className="grid gap-4 px-2 pt-10 sm:max-w-sm mx-auto">
+                  <section className="grid gap-4 pt-10 sm:max-w-xl mx-auto">
                     <div className="grid gap-2 md:gap-3">
-                      <p className=" text-slate-800 dark:text-slate-200 pb-2">
-                        The player with the fastest time will earn at least {matic - 3} $MATIC. It costs $1 MATIC to play. 
+                      <p className=" text-slate-800 dark:text-slate-200">
+                       Earn 50 $MATIC by solving W3rdle in the fastest time.
                       </p>
-                      <button onClick={() => startGame()} className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded w-full">
-                        {admitMutation.isError ? "Try Again" : "Start Game"} 
+                      <button onClick={() => startGame()} className="bg-pink-500 boldest hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded w-full">
+                        {admitMutation.isError ? "Try Again" : `Pay $1 MATIC to Play`} 
                       </button>
                     </div>
+                    <Submissions game={game}/>
                   </section>
                 )
               }
@@ -318,7 +321,7 @@ export default function W3rdle() {
                     }
                     {
                       submitMutation.isLoading && (
-                        <div className="px-2 pt-2 sm:max-w-sm mx-auto">Confirm the transaction is your crypto wallet ...
+                        <div className="px-2 pt-2 sm:max-w-sm mx-auto">Saving your score ...
                         <div className="mx-auto max-w-lg text-center mt-4">
                           <svg role="status" className="w-8 h-8 mr-2 text-white animate-spin dark:text-white fill-pink-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>

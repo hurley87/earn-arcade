@@ -10,6 +10,7 @@ interface SubmissionsProps {
 
 const Submissions: React.FunctionComponent<SubmissionsProps> = ({ game }) => {
   const query = useSubmissions({ game });
+  const date = new Date()
 
   useEvents({ game });
 
@@ -25,7 +26,7 @@ const Submissions: React.FunctionComponent<SubmissionsProps> = ({ game }) => {
   }
 
   return (
-    <div className="mt-4 px-2">
+    <div className="">
       {
         query.isLoading && (
           <div className="mx-auto max-w-sm text-center">
@@ -36,7 +37,10 @@ const Submissions: React.FunctionComponent<SubmissionsProps> = ({ game }) => {
           </div>
         )
       }
-      <div className="pb-4">
+      <div className="pb-4 mt-6">
+      <p className=" text-slate-800 dark:text-slate-200 pb-2">
+        The winner will be annouced on June 6th at 8pm EST.
+      </p>
       <div className="relative text-xs md:text-md xs:max-w-11/12 max-h-80 overflow-x-auto border-2 border-white rounded-md p-2">
         <table className="table-auto mx-auto">
           <thead>

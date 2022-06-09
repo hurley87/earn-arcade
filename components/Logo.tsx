@@ -28,7 +28,7 @@ const Logo = () => {
       <div className='bg-pink-700 rounded-lg text-2xl text-white p-2'><SiApplearcade /></div>
       <div className='text-white pl-2'>
         <h1 className='text-lg leading-6'>Arcade</h1>
-        <p className='text-xs'>Rewards: {matic} $MATIC</p>
+        <p className='text-xs'>Rewards: 50 $MATIC</p>
       </div>
     </div>
   </Link>

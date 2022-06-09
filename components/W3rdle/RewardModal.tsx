@@ -101,8 +101,6 @@ export default function HelpModal(props: Props) {
                   {
                     transactionHash !== "" ? (
                       <>
-                        <p className='pb-2'><a target="_blank" href={ error || !transactionHash ? `https://polygonscan.com/address/${process.env.WALLET_ID}` : `https://polygonscan.com/tx/${transactionHash}`} className="text-pink-500 text-md font-bold pb-4 inline-block">View your transaction</a><br />Now that you've had some practice you can compete against others. Each day, the player with the fastest time will recieve a reward. </p>
-                        
                         <button onClick={() => playAgain()} className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded">
                           <p>Play again</p>
                         </button>
