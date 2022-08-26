@@ -1,16 +1,19 @@
-import Link from 'next/link'
-import Layout from '../components/Layout'
+import { useContext } from 'react'
+import { UserContext } from '../lib/UserContext'
+import Unauthenticated from '../components/Unathenticated'
 
-const AboutPage = () => (
-  <Layout title="About | Next.js + TypeScript Example">
-    <h1>About</h1>
-    <p>This is the about page</p>
-    <p>
-      <Link href="/">
-        <a>Go home</a>
-      </Link>
-    </p>
-  </Layout>
-)
+const About = () => {
+  const [user] = useContext(UserContext)
 
-export default AboutPage
+  return (
+    <Unauthenticated title="Arcade Games">
+      <div className="max-w-7xl p-8 mx-auto space-y-4 lg:py-16">
+        <h3 className="text-lg font-extrabold">
+          TODO: explain games, rewards and challenges. Include FAQ.
+        </h3>
+      </div>
+    </Unauthenticated>
+  )
+}
+
+export default About

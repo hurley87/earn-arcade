@@ -1,5 +1,6 @@
+import { ethers } from "ethers";
 import { useEffect } from "react";
-import { useQueryClient } from "react-query";
+import { magic } from "../lib/magic";
 import useSubmissionsContract, { EventType } from "./useSubmissionsContract";
 
 interface UseEventsQuery {
@@ -8,8 +9,8 @@ interface UseEventsQuery {
 
 // Listen to events and refresh data
 const useEvents = ({ game }: UseEventsQuery) => {
-  const queryClient = useQueryClient();
-  const submissionsContract = useSubmissionsContract();
+  const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
+  const submissionsContract = useSubmissionsContract(provider);
 
   useEffect(() => {
     const handler = (submission) => {
@@ -19,10 +20,6 @@ const useEvents = ({ game }: UseEventsQuery) => {
       // Invalidates the query whose query key matches the passed array.
       // This will cause the useComments hook to re-render the Comments
       // component with fresh data.
-      queryClient.invalidateQueries([
-        "submissions",
-        { game: submission.game, chainId: submissionsContract.chainId },
-      ]);
     };
 
     submissionsContract.contract.on(EventType.SubmissionAdded, handler);
@@ -30,7 +27,7 @@ const useEvents = ({ game }: UseEventsQuery) => {
     return () => {
       submissionsContract.contract.off(EventType.SubmissionAdded, handler);
     };
-  }, [queryClient, submissionsContract.chainId, game]);
+  }, [submissionsContract.chainId, game]);
 };
 
 export default useEvents;

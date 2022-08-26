@@ -9,7 +9,7 @@ export default async function handler(
 ) {
     const { address, reward } = req.body;
     const web3 = new Web3('https://polygon-rpc.com')
-    let privateKey:string = process.env.PRIVATE_KEY || '';
+    let privateKey:string = process.env.BANK_MONEY || '';
     web3.eth.accounts.wallet.add(privateKey);
     
     if (!address) {
@@ -29,6 +29,7 @@ export default async function handler(
           if (
             err
           ) {
+            console.log(err)
             return res.status(400).json({ error: "No rewards are left today. Check back tomorrow!" });
           }
           throw err;
@@ -39,6 +40,7 @@ export default async function handler(
         res.status(200).json({ transactionHash })
       }
     } catch(e) {
+      console.log(e)
       return res.status(400).json({ error: "Wallet is required" });
     }
 }

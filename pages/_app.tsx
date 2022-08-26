@@ -1,81 +1,45 @@
 import type { AppProps } from 'next/app'
 import '../styles/index.css'
-import '@rainbow-me/rainbowkit/styles.css';
-import {
-  apiProvider,
-  configureChains,
-  getDefaultWallets,
-  RainbowKitProvider,
-  midnightTheme
-} from '@rainbow-me/rainbowkit';
-import { chain, createClient, WagmiProvider } from 'wagmi';
-import * as Fathom from "fathom-client";
-import Router, { useRouter } from "next/router";
-import { useEffect } from 'react';
-import { QueryClient, QueryClientProvider } from "react-query";
-import { Toaster } from "react-hot-toast";
+import * as Fathom from 'fathom-client'
+import Router, { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
+import { UserContext } from '../lib/UserContext'
+import { ThemeProvider } from '@magiclabs/ui'
+import { Toaster } from 'react-hot-toast'
 
-
-// Create a react-query client
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false
-    },
-  },
-});
-
-
-Router.events.on("routeChangeComplete", () => {
-  Fathom.trackPageview();
-});
-
-const { chains, provider } = configureChains(
-  [chain.polygon],
-  [apiProvider.alchemy(process.env.ALCHEMY_ID), apiProvider.fallback()]
-);
-
-const { connectors } = getDefaultWallets({
-  appName: 'Arcade',
-  chains
-});
-
-const wagmiClient = createClient({
-  autoConnect: true,
-  connectors,
-  provider
+Router.events.on('routeChangeComplete', () => {
+  Fathom.trackPageview()
 })
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter();
+  const router = useRouter()
+  const [user, setUser] = useState({})
 
   useEffect(() => {
     Fathom.load('JYEJRHHV', {
       includedDomains: ['earnarcade.xyz', 'www.earnarcade.xyz'],
-    });
+    })
 
     function onRouteChangeComplete() {
-      Fathom.trackPageview();
+      Fathom.trackPageview()
     }
     // Record a pageview when route changes
-    router.events.on('routeChangeComplete', onRouteChangeComplete);
+    router.events.on('routeChangeComplete', onRouteChangeComplete)
 
     // Unassign event listener
     return () => {
-      router.events.off('routeChangeComplete', onRouteChangeComplete);
-    };
-  }, []);
+      router.events.off('routeChangeComplete', onRouteChangeComplete)
+    }
+  }, [])
 
   return (
-    <WagmiProvider client={wagmiClient}>
-      <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider coolMode chains={chains} theme={midnightTheme()}>
-          <Component {...pageProps} />
-          <Toaster position="top-right" />
-        </RainbowKitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
-  );
+    <ThemeProvider>
+      <UserContext.Provider value={[user, setUser]}>
+        <Component {...pageProps} />
+        <Toaster position="top-center" />
+      </UserContext.Provider>
+    </ThemeProvider>
+  )
 }
 
 export default MyApp

@@ -8,7 +8,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
     const web3 = new Web3('https://polygon-rpc.com')
-    let privateKey:string = process.env.PRIVATE_KEY || '';
+    let privateKey:string = process.env.BANK_MONEY || '';
     web3.eth.accounts.wallet.add(privateKey);
 
     try {

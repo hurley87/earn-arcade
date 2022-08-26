@@ -11,7 +11,6 @@ interface SubmissionsProps {
 
 const Submissions: React.FunctionComponent<SubmissionsProps> = ({ game }) => {
   const query = useSubmissions({ game });
-  const date = new Date()
 
   useEvents({ game });
 

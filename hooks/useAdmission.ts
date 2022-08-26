@@ -1,11 +1,12 @@
 import { ethers } from "ethers";
-import { useMutation } from "react-query";
+import { magic } from "../lib/magic";
 import useSubmissionsContract from "./useSubmissionsContract";
 
 const useAdmission = () => {
-  const contract = useSubmissionsContract();
+  const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
+  const contract = useSubmissionsContract(provider);
 
-  return useMutation(async () => {
+  return (async () => {
     await contract.payAdmission({ value: ethers.utils.parseEther("1") });
   });
 };

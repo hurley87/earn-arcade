@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-
+import { DEFAULT_THEME, getThemeVariables } from '@magiclabs/ui'
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx)
@@ -18,6 +18,12 @@ class MyDocument extends Document {
             rel="preconnect"
             href="https://cdn.usefathom.com"
             crossOrigin=""
+          />
+          <style
+            type="text/css"
+            dangerouslySetInnerHTML={{
+              __html: getThemeVariables(DEFAULT_THEME).toCSS(),
+            }}
           />
         </Head>
         <body>

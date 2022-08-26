@@ -1,19 +1,19 @@
-import { FC, Fragment, ReactNode, useRef } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import clsx from "clsx";
+import { FC, Fragment, ReactNode, useRef } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
+import clsx from 'clsx'
 
-import { XIcon } from "@heroicons/react/solid";
+import { XIcon } from '@heroicons/react/solid'
 
 export type Props = {
-  open: boolean;
-  title: ReactNode;
-  onClose(open: boolean): void;
-  actionLabel?: string;
-  startGame?(): void;
-};
+  open: boolean
+  title: ReactNode
+  onClose(open: boolean): void
+  actionLabel?: string
+  startGame?(): void
+}
 
 const Modal: FC<Props> = (props) => {
-  const cancelButtonRef = useRef(null);
+  const cancelButtonRef = useRef(null)
 
   return (
     <Transition.Root show={props.open} as={Fragment}>
@@ -53,8 +53,8 @@ const Modal: FC<Props> = (props) => {
           >
             <div
               className={clsx(
-                "relative inline-block transform overflow-hidden rounded-2xl text-left align-bottom shadow-xl",
-                "transition-all sm:my-8 sm:w-full sm:max-w-lg sm:align-middle"
+                'relative inline-block transform overflow-hidden rounded-2xl text-left align-bottom shadow-xl',
+                'transition-all sm:my-8 sm:w-full sm:max-w-lg sm:align-middle'
               )}
             >
               <div className="bg-white px-4 pt-5 pb-4 dark:bg-slate-800 dark:text-white sm:p-6 sm:pb-4">
@@ -84,7 +84,7 @@ const Modal: FC<Props> = (props) => {
         </div>
       </Dialog>
     </Transition.Root>
-  );
-};
+  )
+}
 
-export default Modal;
+export default Modal

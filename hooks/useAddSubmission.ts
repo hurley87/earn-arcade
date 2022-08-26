@@ -1,4 +1,5 @@
-import { useMutation } from "react-query";
+import { ethers } from "ethers";
+import { magic } from "../lib/magic";
 import useSubmissionsContract from "./useSubmissionsContract";
 
 interface UseAddSubmissionPayload {
@@ -8,10 +9,11 @@ interface UseAddSubmissionPayload {
   end: number;
 }
 
-const useAddSubmission = () => {
-  const contract = useSubmissionsContract();
+const useAddSubmission = (provider) => {
+  
+  const contract = useSubmissionsContract(provider);
 
-  return useMutation(async ({ game, answer, start, end }: UseAddSubmissionPayload) => {
+  return (async ({ game, answer, start, end }: UseAddSubmissionPayload) => {
     await contract.addSubmission(game, answer, start, end);
   });
 };

@@ -6,6 +6,13 @@ module.exports = {
     './index.js',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        Inter: ['Inter', 'serif'],
+      },
+      animation: {
+        'spin-slow': 'spin 6s linear infinite',
+      },
+    },
   },
 }
