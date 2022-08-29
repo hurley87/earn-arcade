@@ -113,7 +113,7 @@ export default function Nav() {
                         onClick={() => login()}
                         className="px-3 py-2 rounded-md text-sm font-medium bg-pink-600 text-white"
                       >
-                        Create Wallet
+                        Get Started
                       </Menu.Button>
                     )}
                   </div>

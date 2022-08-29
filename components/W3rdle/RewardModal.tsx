@@ -46,11 +46,13 @@ export default function HelpModal(props: Props) {
         method: 'POST',
       })
       const response = await res.json()
+      console.log(response)
       setTransactionLoading(false)
       const transactionHash = response.transactionHash
       setTransactionHash(transactionHash)
       trackGoal('2PYDAEBY', 0)
-    } catch {
+    } catch (e) {
+      console.log(e)
       setTransactionLoading(false)
       const wallet: string = process.env.WALLET_ID || ''
       setTransactionHash(wallet)
@@ -74,7 +76,7 @@ export default function HelpModal(props: Props) {
           </header>
         )}
 
-        {user.balance > 1 ? (
+        {user.balance > 5 ? (
           <>
             <p className="pb-2">
               You have enough to challenge someone! You can challenge a friend{' '}

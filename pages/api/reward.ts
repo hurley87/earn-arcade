@@ -16,19 +16,28 @@ export default async function handler(
       return res.status(400).json({ error: "Wallet is required" });
     }
 
+    console.log(web3.eth.accounts.wallet[0].address)
+    console.log(web3.utils.toWei(reward.toString(), 'ether'))
+
     try {
-        const receipt = await web3.eth
-        .sendTransaction({
-          from: web3.eth.accounts.wallet[0].address,
-          to: address,
-          value: web3.utils.toWei(reward.toString(), 'ether'),
-          gas: '314150',
-          gasPrice: await web3.eth.getGasPrice(),
-        })
+      const value = web3.utils.toWei(reward.toString(), 'ether')
+      const from =  web3.eth.accounts.wallet[0].address;
+      const gasPrice = await web3.eth.getGasPrice()
+      const transaction = {
+        from,
+        to: address,
+        value,
+        gas: 314150,
+        gasPrice,
+      }
+      console.log(transaction)
+      const receipt = await web3.eth
+        .sendTransaction(transaction)
         .catch(err => {
           if (
             err
           ) {
+            console.log("COOL ERROR")
             console.log(err)
             return res.status(400).json({ error: "No rewards are left today. Check back tomorrow!" });
           }

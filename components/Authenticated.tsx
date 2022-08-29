@@ -76,7 +76,7 @@ const Layout = ({
               onClick={login}
               className="bg-pink-500 hover:bg-pink-400 text-white text-xl font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded mt-6 shadow-xl mr-4"
             >
-              Create Wallet
+              Get Started
             </button>
           </div>
         </div>
