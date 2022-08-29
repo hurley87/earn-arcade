@@ -10,7 +10,7 @@ interface Keypad {
 }
 
 const calculateTimeLeft = (startTime: number) => {
-  return startTime === 0 ? 0 : startTime - 1
+  return startTime === 0 ? 0 : startTime + 1
 }
 
 const Home: NextPage = () => {
@@ -48,12 +48,13 @@ const Home: NextPage = () => {
       const timer = setTimeout(() => {
         setTimeLeft(calculateTimeLeft(timeLeft))
       }, 1000)
+      console.log(timer)
       return () => clearTimeout(timer)
     }
   })
 
   function pickNumber(number: number) {
-    if (picks.length === 0) setTimeLeft(9)
+    if (picks.length === 0) setTimeLeft(0)
     const picksToDisplay: string[] = []
     picks.push(number)
     numbers.map((number) =>
@@ -101,12 +102,7 @@ const Home: NextPage = () => {
   }
 
   function activeGame() {
-    return (
-      picks.length < 6 &&
-      picks.length > 0 &&
-      displayPicks.includes('_') &&
-      timeLeft !== 0
-    )
+    return picks.length < 6 && picks.length > 0 && displayPicks.includes('_')
   }
 
   function winner() {
@@ -185,7 +181,6 @@ const Home: NextPage = () => {
                   : 'bg-pink-700 hover:bg-pink-500'
               } md:p-3 p-2 py-4 rounded-md lg:text-xl sm:text-sm md:text-md font-bold transition-all md:min-w-[2.5rem] min-w-[1.85rem] text-white mt-1 mr-1`}
               disabled={
-                timeLeft === 0 ||
                 key.status !== 'unknown' ||
                 !(picks.length >= 0 && picks.length < 6) ||
                 (picks.length > 0 && !displayPicks.includes('_'))
@@ -199,7 +194,7 @@ const Home: NextPage = () => {
           {picks.length === 0 ? null : activeGame() ? (
             <p>
               {6 - picks.length} {picks.length === 4 ? 'pick' : 'picks'}{' '}
-              remaining. {timeLeft} seconds left.
+              remaining.
             </p>
           ) : winner() ? (
             <div>You won! {startAgainBtn()}</div>

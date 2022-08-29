@@ -31,7 +31,7 @@ export default function HelpModal(props: Props) {
 
   async function claimReward() {
     const address = user?.address
-    const reward = 0.25
+    const reward = 1
     setTransactionLoading(true)
 
     try {
