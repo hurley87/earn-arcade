@@ -16,14 +16,9 @@ export default async function handler(
       return res.status(400).json({ error: "Wallet is required" });
     }
 
-    console.log(web3.eth.accounts.wallet[0].address)
-    console.log(web3.utils.toWei(reward.toString(), 'ether'))
-
     const value = web3.utils.toWei(reward.toString(), 'ether')
     const from =  web3.eth.accounts.wallet[0].address;
     let gasPrice = await web3.eth.getGasPrice()
-    console.log('GAS')
-    console.log(gasPrice)
     gasPrice = parseInt((parseInt(gasPrice) * 1.2).toString()).toString()
 
     try {
@@ -35,7 +30,6 @@ export default async function handler(
         gas: 314150,
         gasPrice,
       }
-      console.log(transaction)
       const receipt = await web3.eth
         .sendTransaction(transaction)
         .catch(err => {
