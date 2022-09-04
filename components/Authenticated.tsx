@@ -14,7 +14,7 @@ type Props = {
   user?: any
 }
 
-const Layout = ({
+const Authenticated = ({
   children,
   title = 'Arcade | Play games and earn $MATIC',
 }: Props) => {
@@ -50,7 +50,7 @@ const Layout = ({
       <Nav />
 
       {user.address && (
-        <div className="w-full md:w-11/12 mx-auto text-white pt-6 md:pt-0">
+        <div className="max-w-7xl mx-auto px-2 lg:px-8 text-white pt-6">
           {children}
         </div>
       )}
@@ -85,4 +85,4 @@ const Layout = ({
   )
 }
 
-export default Layout
+export default Authenticated

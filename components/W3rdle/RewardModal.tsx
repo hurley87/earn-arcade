@@ -54,8 +54,6 @@ export default function HelpModal(props: Props) {
     } catch (e) {
       console.log(e)
       setTransactionLoading(false)
-      const wallet: string = process.env.WALLET_ID || ''
-      setTransactionHash(wallet)
       trackGoal('2BKN2Q8G', 0)
     }
   }
@@ -67,19 +65,20 @@ export default function HelpModal(props: Props) {
   return (
     <Modal title="Claim Your Reward" open={props.open} onClose={props.onClose}>
       <section className="grid gap-4">
-        {!noRewards && transactionHash === '' && (
+        {!noRewards && transactionHash === '' && user.balance < 5 && (
           <header className="grid gap-2 md:gap-3">
             <p className="text-sm text-slate-800 dark:text-slate-200 pb-2">
-              Right now we are sending you 1 $MATIC! It may take a minute or so
-              to get there.
+              You just earned 1 $MATIC! After you claim your reward it may take
+              a minute or so before you see it in your wallet.
             </p>
           </header>
         )}
 
-        {user.balance > 5 ? (
+        {user.balance >= 5 ? (
           <>
             <p className="pb-2">
-              You have enough to challenge someone! You can challenge a friend{' '}
+              You have enough $matic to challenge someone! You can challenge a
+              friend{' '}
               <Link href="/challenges">
                 <span className="border-b-2 border-pink-500 text-pink-500 cursor-pointer">
                   here

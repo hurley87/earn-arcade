@@ -9,6 +9,9 @@ module.exports = {
     extend: {
       fontFamily: {
         Inter: ['Inter', 'serif'],
+        W95FA: ['W95FA', 'serif'],
+        TerminalRegular: ['TerminalRegular', 'serif'],
+        TerminalBold: ['TerminalBold', 'serif'],
       },
       animation: {
         'spin-slow': 'spin 6s linear infinite',

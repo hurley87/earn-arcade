@@ -5,7 +5,7 @@ const IndexPage = () => {
   return (
     <Unauthenticated>
       <div className="text-center pt-8">
-        <h1 className="text-4xl md:text-6xl font-bold max-w-xl mx-auto pt-2 px-6">
+        <h1 className="text-4xl md:text-6xl max-w-xl mx-auto pt-2 px-6 font-TerminalBold">
           Get Paid to Play Games Online
         </h1>
         <p className="text-xl md:text-2xl pt-4">

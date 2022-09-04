@@ -21,11 +21,8 @@ const Rewards = () => {
   }, [])
   return (
     <Authenticated title="Arcade Games">
-      <div className="max-w-7xl p-8 mx-auto space-y-4 lg:py-16">
-        <h3 className="text-lg font-extrabold">
-          {matic} $MATIC available. Occasionally, more rewards will be added.
-        </h3>
-      </div>
+      <h3 className="text-4xl py-4 font-TerminalBold">Rewards</h3>
+      <p>{matic} $MATIC available. Occasionally, more rewards will be added.</p>
     </Authenticated>
   )
 }

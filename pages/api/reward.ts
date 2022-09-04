@@ -49,6 +49,7 @@ export default async function handler(
         res.status(200).json({ transactionHash })
       }
     } catch(e) {
+      console.log('ERROR')
       console.log(e)
       return res.status(400).json({ error: "Wallet is required" });
     }
