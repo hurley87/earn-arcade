@@ -19,10 +19,15 @@ export default async function handler(
     console.log(web3.eth.accounts.wallet[0].address)
     console.log(web3.utils.toWei(reward.toString(), 'ether'))
 
+    const value = web3.utils.toWei(reward.toString(), 'ether')
+    const from =  web3.eth.accounts.wallet[0].address;
+    let gasPrice = await web3.eth.getGasPrice()
+    console.log('GAS')
+    console.log(gasPrice)
+    gasPrice = parseInt((parseInt(gasPrice) * 1.2).toString()).toString()
+
     try {
-      const value = web3.utils.toWei(reward.toString(), 'ether')
-      const from =  web3.eth.accounts.wallet[0].address;
-      const gasPrice = await web3.eth.getGasPrice()
+
       const transaction = {
         from,
         to: address,
